@@ -1,0 +1,1 @@
+{ programs.glirc.enable = true; }
