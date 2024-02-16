@@ -9,8 +9,8 @@
         "ohci_pci"
         "sd_mod"
         "sr_mod"
-        "usb_hid"
         "usb_storage"
+        "usbhid"
         "xhci_pci"
       ];
     };

@@ -41,7 +41,7 @@
       blackbox = {
         hostName = "blackbox";
         system = "x86_64-linux";
-        stateVersion = "";
+        stateVersion = "23.11";
       };
       epc = {
         hostname = "epc";
@@ -207,12 +207,10 @@
         home = import homeModules/config/home;
         sd-switch = import homeModules/config/sd-switch;
       };
-      tuxedo = {
-        nixos = import homeModules/tuxedo/nixos;
-        hbrs = import homeModules/tuxedo/hbrs;
-      };
+      tuxedo.hbrs = import homeModules/tuxedo/hbrs;
       blackbox = { };
       epc = { };
+      users.nixos = import homeModules/users/nixos;
     };
   } // {
     neovimModules = {

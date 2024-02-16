@@ -1,6 +1,6 @@
 keys:
   - &tuxedo age14keqxfdkualn3ez68y9flvspkyp4tqw43cn2sj6ar2tde5myc98qguqf8w
-  - &blackbox age18xktg7kfy24t8tjnsnxqvdtrjysu30cfpthczh2t8ya7ng34c9nqrrwmrf
+  - &blackbox age1l5phd0krdnwdz626sjed3txgqgcug2l6ls3sgnqacke2pvsmfvlshtn9eh
   - &epc age18xktg7kfy24t8tjnsnxqvdtrjysu30cfpthczh2t8ya7ng34c9nqrrwmrf
 creation_rules:
   - path_regex: secrets/secrets.yaml

@@ -1,5 +1,6 @@
 {
   config,
+  hostName,
   ...
 }: {
   hardware.nitrokey.enable = true;
@@ -7,4 +8,5 @@
     enable = true;
     authFile = config.sops.secrets.nitrokey.path;
   };
+  sops.secrets.nitrokey = { sopsFile = ../../../secrets/${ hostName }.yaml; };
 }
