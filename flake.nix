@@ -207,10 +207,9 @@
         home = import homeModules/config/home;
         sd-switch = import homeModules/config/sd-switch;
       };
-      tuxedo.hbrs = import homeModules/tuxedo/hbrs;
-      blackbox = { };
-      epc = { };
-      users.nixos = import homeModules/users/nixos;
+      hbrs = import homeModules/hbrs;
+      sbmr = import homeModules/hbrs;
+      nixos = import homeModules/nixos;
     };
   } // {
     neovimModules = {

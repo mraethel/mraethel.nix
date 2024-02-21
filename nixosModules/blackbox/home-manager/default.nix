@@ -3,6 +3,6 @@
   ...
 }: {
   home-manager.users = {
-    nixos.imports = [ mraethel.homeModules.users.nixos ];
+    nixos.imports = [ mraethel.homeModules.nixos ];
   };
 }
