@@ -18,8 +18,8 @@
 
     tidalcycles.url = "github:mitchmindtree/tidalcycles.nix";
 
-    utils.url = "github:numtide/flake-utils";
-    utils.inputs.systems.follows = "systems";
+    flakeUtils.url = "github:numtide/flake-utils";
+    flakeUtils.inputs.systems.follows = "systems";
     systems.url = "github:nix-systems/x86_64-linux";
   };
 
@@ -29,7 +29,7 @@
     self,
     supercollider,
     tidalcycles,
-    utils,
+    flakeUtils,
     ...
   }: {
     systems = {
@@ -46,7 +46,7 @@
       epc = {
         hostname = "epc";
         system = "x86_64-linux";
-        stateVersion = "";
+        stateVersion = "22.11";
       };
     };
   } // {
@@ -230,7 +230,7 @@
         languages = import neovimModules/config/languages/legacy;
       };
     };
-  } // utils.lib.eachDefaultSystem (system: {
+  } // flakeUtils.lib.eachDefaultSystem (system: {
     neovimConfigurations = let
       pkgs = import nixpkgs {
         inherit system;
@@ -268,7 +268,7 @@
     overlays = {
       ungoogled-chromium = import overlays/ungoogled-chromium;
     };
-  } // utils.lib.eachDefaultSystem (system: {
+  } // flakeUtils.lib.eachDefaultSystem (system: {
     packages = let
       pkgs = import nixpkgs {
         inherit system;
@@ -302,7 +302,7 @@
         };
       };
     };
-  }) // utils.lib.eachDefaultSystem (system: {
+  }) // flakeUtils.lib.eachDefaultSystem (system: {
     legacyPackages = let
       pkgs = import nixpkgs {
         inherit system;
