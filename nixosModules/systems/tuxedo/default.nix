@@ -4,6 +4,5 @@
     ./boot
     ./locale
     ./pipewire
-    ./home-manager
   ];
 }

@@ -85,9 +85,18 @@
         tor = import nixosModules/config/tor;
         ungoogled-chromium = import nixosModules/config/ungoogled-chromium;
       };
-      tuxedo = import nixosModules/tuxedo;
-      blackbox = import nixosModules/blackbox;
-      epc = import nixosModules/epc;
+      users = {
+        nixos = import nixosModules/users/nixos;
+        arcan = import nixosModules/users/arcan;
+        hbrs = import nixosModules/users/hbrs;
+        scdev = import nixosModules/users/scdev;
+        sbmr = import nixosModules/users/sbmr;
+      };
+      systems = {
+        tuxedo = import nixosModules/systems/tuxedo;
+        blackbox = import nixosModules/systems/blackbox;
+        epc = import nixosModules/systems/epc;
+      };
     };
   } // {
     nixosConfigurations = {
@@ -125,6 +134,12 @@
           texlive
           tor
           ungoogled-chromium
+        ]) ++ (with self.nixosModules.users; [
+          arcan
+          nixos
+          sbmr
+          hbrs
+          scdev
         ]) ++ (with nixpkgs.nixosModules; [
           notDetected
         ]) ++ (with inputs.musnix.nixosModules; [
@@ -135,7 +150,7 @@
           default
         ]) ++ (with inputs.homeManager.nixosModules; [
           home-manager
-        ]) ++ [ self.nixosModules.tuxedo ];
+        ]) ++ [ self.nixosModules.systems.tuxedo ];
       };
       blackbox = nixpkgs.lib.nixosSystem {
         inherit (self.systems.blackbox) system;
@@ -164,11 +179,13 @@
           system
           tor
           ungoogled-chromium
+        ]) ++ (with self.nixosModules.users; [
+          nixos
         ]) ++ (with nixpkgs.nixosModules; [
           notDetected
         ]) ++ (with inputs.sops.nixosModules; [
           sops
-        ]) ++ [ self.nixosModules.blackbox ];
+        ]) ++ [ self.nixosModules.systems.blackbox ];
       };
       epc = nixpkgs.lib.nixosSystem {
         inherit (self.systems.epc) system;
@@ -193,11 +210,13 @@
           system
           tor
           ungoogled-chromium
+        ]) ++ (with self.nixosModules.users; [
+          nixos
         ]) ++ (with nixpkgs.nixosModules; [
           notDetected
         ]) ++ (with inputs.sops.nixosModules; [
           sops
-        ]) ++ [ self.nixosModules.epc ];
+        ]) ++ [ self.nixosModules.systems.epc ];
       };
     };
   } // {
@@ -207,9 +226,11 @@
         home = import homeModules/config/home;
         sd-switch = import homeModules/config/sd-switch;
       };
-      hbrs = import homeModules/hbrs;
-      sbmr = import homeModules/hbrs;
-      nixos = import homeModules/nixos;
+      users = {
+        hbrs = import homeModules/users/hbrs;
+        sbmr = import homeModules/users/sbmr;
+        nixos = import homeModules/users/nixos;
+      };
     };
   } // {
     neovimModules = {
