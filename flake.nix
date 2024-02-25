@@ -60,6 +60,7 @@
         sops = import nixosModules/options/sops;
         texlive = import nixosModules/options/texlive;
         ungoogled-chromium = import nixosModules/options/ungoogled-chromium;
+        zsh = import nixosModules/options/zsh;
       };
       config = {
         alacritty = import nixosModules/config/alacritty;
@@ -84,6 +85,7 @@
         texlive = import nixosModules/config/texlive;
         tor = import nixosModules/config/tor;
         ungoogled-chromium = import nixosModules/config/ungoogled-chromium;
+        zsh = import nixosModules/config/zsh;
       };
       users = {
         nixos = import nixosModules/users/nixos;
@@ -115,6 +117,7 @@
           texlive
           ungoogled-chromium
           alacritty
+          zsh
         ]) ++ (with self.nixosModules.config; [
           alacritty
           glirc
@@ -134,6 +137,7 @@
           texlive
           tor
           ungoogled-chromium
+          zsh
         ]) ++ (with self.nixosModules.users; [
           arcan
           nixos
@@ -165,6 +169,7 @@
           neovim
           sops
           ungoogled-chromium
+          zsh
         ]) ++ (with self.nixosModules.config; [
           alacritty
           glirc
@@ -179,6 +184,7 @@
           system
           tor
           ungoogled-chromium
+          zsh
         ]) ++ (with self.nixosModules.users; [
           nixos
         ]) ++ (with nixpkgs.nixosModules; [
@@ -198,6 +204,7 @@
           neovim
           sops
           ungoogled-chromium
+          zsh
         ]) ++ (with self.nixosModules.config; [
           alacritty
           neovim
@@ -210,6 +217,7 @@
           system
           tor
           ungoogled-chromium
+          zsh
         ]) ++ (with self.nixosModules.users; [
           nixos
         ]) ++ (with nixpkgs.nixosModules; [
