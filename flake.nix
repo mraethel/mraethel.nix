@@ -64,7 +64,6 @@
       };
       config = {
         alacritty = import nixosModules/config/alacritty;
-        git = import nixosModules/config/git;
         glirc = import nixosModules/config/glirc;
         iamb = import nixosModules/config/iamb;
         musnix = import nixosModules/config/musnix;
@@ -93,6 +92,7 @@
         hbrs = import nixosModules/users/hbrs;
         scdev = import nixosModules/users/scdev;
         sbmr = import nixosModules/users/sbmr;
+        root = import nixosModules/users/root;
       };
       systems = {
         tuxedo = import nixosModules/systems/tuxedo;
@@ -229,10 +229,14 @@
     };
   } // {
     homeModules = {
-      options = { };
+      options = {
+        fossil = import homeModules/options/fossil;
+      };
       config = {
         home = import homeModules/config/home;
         sd-switch = import homeModules/config/sd-switch;
+        git = import homeModules/config/git;
+        fossil = import homeModules/config/fossil;
       };
       users = {
         hbrs = import homeModules/users/hbrs;

@@ -1,0 +1,1 @@
+{ programs.fossil.enable = true; }
