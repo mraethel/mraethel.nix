@@ -19,7 +19,6 @@ in {
     programs = {
       alacritty.settings.font.normal.family = lib.mkIf config.programs.alacritty.enable "MesloLGS NF";
       zsh.promptInit = ''
-        # powerlevel10k
         source ${ pkgs.zsh-powerlevel10k }/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
         source ${ cfg.p10k.configFile }
       '';
