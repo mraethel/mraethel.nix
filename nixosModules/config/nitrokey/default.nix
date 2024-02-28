@@ -8,5 +8,5 @@
     enable = true;
     authFile = config.sops.secrets.nitrokey.path;
   };
-  sops.secrets.nitrokey = { sopsFile = ../../../secrets/${ hostName }.yaml; };
+  sops.secrets.nitrokey = { sopsFile = ../../../secrets/systems/${ hostName }.yaml; };
 }
