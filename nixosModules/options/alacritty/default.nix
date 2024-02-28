@@ -5,13 +5,13 @@
   ...
 }: let
   cfg = config.programs.alacritty;
-  settingsFormat = pkgs.formats.toml { };
+  toml = pkgs.formats.toml { };
 in {
   options.programs.alacritty = {
     enable = lib.mkEnableOption "alacritty";
     package = lib.mkPackageOption pkgs "alacritty" { };
     settings = lib.mkOption {
-      type = settingsFormat.type;
+      type = toml.type;
       default = { };
     };
   };
@@ -19,7 +19,7 @@ in {
   config.environment = lib.mkIf cfg.enable {
     systemPackages = [ cfg.package ];
     etc.alacritty = {
-      source = settingsFormat.generate "alacritty.toml" cfg.settings;
+      source = toml.generate "alacritty.toml" cfg.settings;
       target = "alacritty/alacritty.toml";
     };
   };

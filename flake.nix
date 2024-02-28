@@ -57,6 +57,7 @@
         iamb = import nixosModules/options/iamb;
         neovim = import nixosModules/options/neovim;
         ploopy = import nixosModules/options/ploopy;
+        pipewire = import nixosModules/options/pipewire;
         sops = import nixosModules/options/sops;
         texlive = import nixosModules/options/texlive;
         ungoogled-chromium = import nixosModules/options/ungoogled-chromium;
@@ -112,6 +113,7 @@
           glirc
           iamb
           neovim
+          pipewire
           ploopy
           sops
           texlive

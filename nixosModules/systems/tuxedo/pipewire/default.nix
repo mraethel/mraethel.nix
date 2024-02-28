@@ -1,10 +1,10 @@
 {
-  services.pipewire.extraConfig.pipewire = {
-    pipewire = {
-      "context.properties" = {
-        "default.clock.quantum" = 128;
-      };
-    };
+  services.pipewire.extraConfig = {
+    pipewire.pipewire."context.properties"."default.clock.quantum" = 128;
+    wireplumber.bluetooth."monitor.bluez.rules" = [{
+      matches = [{ "node.name" = "bluez_input.58_24_29_7D_AD_C6.2"; }];
+      actions.update-props."bluez5.codec" = "aptx";
+    }];
 #   roc-source = {
 #     "context.modules" = [{
 #       name = "libpipewire-module-roc-source";
