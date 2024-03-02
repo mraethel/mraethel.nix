@@ -12,5 +12,5 @@ in {
     default = false;
   };
 
-  config.programs.zsh.promptInit = lib.mkIf (cfg.enable && cfg.completion.specialDirs) "zstyle ':completion:*' special-dirs true";
+  config.programs.zsh.promptInit = lib.mkIf cfg.completion.specialDirs "zstyle ':completion:*' special-dirs true";
 }
