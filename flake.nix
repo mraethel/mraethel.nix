@@ -57,6 +57,7 @@
         iamb = import nixosModules/options/iamb;
         neovim = import nixosModules/options/neovim;
         ploopy = import nixosModules/options/ploopy;
+        pianoteq = import nixosModules/options/pianoteq;
         pipewire = import nixosModules/options/pipewire;
         sops = import nixosModules/options/sops;
         texlive = import nixosModules/options/texlive;
@@ -75,6 +76,7 @@
         nix = import nixosModules/config/nix;
         nix-serve = import nixosModules/config/nix-serve;
         openssh = import nixosModules/config/openssh;
+        pianoteq = import nixosModules/config/pianoteq;
         pipewire = import nixosModules/config/pipewire;
         ploopy = import nixosModules/config/ploopy;
         privoxy = import nixosModules/config/privoxy;
@@ -88,12 +90,12 @@
         zsh = import nixosModules/config/zsh;
       };
       users = {
-        nixos = import nixosModules/users/nixos;
         arcan = import nixosModules/users/arcan;
         hbrs = import nixosModules/users/hbrs;
-        scdev = import nixosModules/users/scdev;
-        sbmr = import nixosModules/users/sbmr;
+        nixos = import nixosModules/users/nixos;
         root = import nixosModules/users/root;
+        sbmr = import nixosModules/users/sbmr;
+        scdev = import nixosModules/users/scdev;
       };
       systems = {
         tuxedo = import nixosModules/systems/tuxedo;
@@ -110,25 +112,30 @@
           mraethel = self;
         };
         modules = (with self.nixosModules.options; [
+          alacritty
           glirc
           iamb
           neovim
+          pianoteq
           pipewire
           ploopy
           sops
           texlive
           ungoogled-chromium
-          alacritty
           zsh
         ]) ++ (with self.nixosModules.config; [
           alacritty
           glirc
+          home-manager
           iamb
           musnix
           neovim
+          networking
           nitrokey
+          nix
           nix-serve
           openssh
+          pianoteq
           pipewire
           ploopy
           privoxy
@@ -142,9 +149,10 @@
           zsh
         ]) ++ (with self.nixosModules.users; [
           arcan
-          nixos
-          sbmr
           hbrs
+          nixos
+          root
+          sbmr
           scdev
         ]) ++ (with nixpkgs.nixosModules; [
           notDetected
@@ -152,7 +160,7 @@
           musnix
         ]) ++ (with inputs.sops.nixosModules; [
           sops
-        ]) ++ (with inputs.nixServeNg.nixosModules; [
+        ]) ++ (with inputs.nixServeNG.nixosModules; [
           default
         ]) ++ (with inputs.homeManager.nixosModules; [
           home-manager
