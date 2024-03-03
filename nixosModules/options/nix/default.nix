@@ -5,10 +5,10 @@
 }: let
   cfg = config.nix;
 in {
-  options.nix.accessTokens = lib.mkOption {
-    type = lib.types.attrsOf lib.types.path;
-    default = { };
+  options.nix.includes = lib.mkOption {
+    type = lib.types.listOf lib.types.path;
+    default = [ ];
   };
 
-  config.nix.settings.access-tokens = builtins.toString (lib.mapAttrsToList (name: source: name + "=" + source.content) cfg.accessTokens); # token still lands inside the nix-store :/
+  config.nix.extraOptions = lib.concatMapStringsSep "\n" (file: "!include ${ file }") cfg.includes;
 }

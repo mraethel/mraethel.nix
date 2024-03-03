@@ -56,6 +56,7 @@
         glirc = import nixosModules/options/glirc;
         iamb = import nixosModules/options/iamb;
         neovim = import nixosModules/options/neovim;
+        nix = import nixosModules/options/nix;
         ploopy = import nixosModules/options/ploopy;
         pianoteq = import nixosModules/options/pianoteq;
         pipewire = import nixosModules/options/pipewire;
@@ -118,6 +119,7 @@
           glirc
           iamb
           neovim
+          nix
           pianoteq
           pipewire
           ploopy
