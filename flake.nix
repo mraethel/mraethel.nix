@@ -55,6 +55,7 @@
         alacritty = import nixosModules/options/alacritty;
         glirc = import nixosModules/options/glirc;
         iamb = import nixosModules/options/iamb;
+        keepass = import nixosModules/options/keepass;
         neovim = import nixosModules/options/neovim;
         nix = import nixosModules/options/nix;
         ploopy = import nixosModules/options/ploopy;
@@ -70,6 +71,7 @@
         alacritty = import nixosModules/config/alacritty;
         glirc = import nixosModules/config/glirc;
         iamb = import nixosModules/config/iamb;
+        keepass = import nixosModules/config/keepass;
         musnix = import nixosModules/config/musnix;
         home-manager = import nixosModules/config/home-manager;
         neovim = import nixosModules/config/neovim;
@@ -118,6 +120,7 @@
           alacritty
           glirc
           iamb
+          keepass
           neovim
           nix
           pianoteq
@@ -133,6 +136,7 @@
           glirc
           home-manager
           iamb
+          keepass
           musnix
           neovim
           networking
