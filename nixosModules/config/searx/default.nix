@@ -1,6 +1,5 @@
 {
   config,
-  hostName,
   ...
 }: {
   services.searx = {
@@ -22,5 +21,4 @@
       };
     };
   };
-  sops.secrets.searx = { sopsFile = ../../../secrets/systems/${ hostName }.yaml; };
 }

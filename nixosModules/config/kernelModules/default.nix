@@ -1,0 +1,4 @@
+{
+  kernelModules,
+  ...
+}: { boot = kernelModules; }

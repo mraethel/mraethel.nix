@@ -1,0 +1,4 @@
+{
+  swapDevices,
+  ...
+}: { inherit swapDevices; }

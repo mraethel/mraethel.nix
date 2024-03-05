@@ -31,25 +31,12 @@
     tidalcycles,
     flakeUtils,
     ...
-  }: {
+  }: rec {
     systems = {
-      tuxedo = {
-        hostName = "tuxedo";
-        system = "x86_64-linux";
-        stateVersion = "23.11";
-      };
-      blackbox = {
-        hostName = "blackbox";
-        system = "x86_64-linux";
-        stateVersion = "23.11";
-      };
-      epc = {
-        hostname = "epc";
-        system = "x86_64-linux";
-        stateVersion = "22.11";
-      };
+      tuxedo = import systems/tuxedo;
+      blackbox = import systems/tuxedo;
+      epc = import systems/epc;
     };
-  } // {
     nixosModules = {
       options = {
         alacritty = import nixosModules/options/alacritty;
@@ -68,10 +55,13 @@
       };
       config = {
         alacritty = import nixosModules/config/alacritty;
+        fileSystems = import nixosModules/config/fileSystems;
         glirc = import nixosModules/config/glirc;
-        iamb = import nixosModules/config/iamb;
-        musnix = import nixosModules/config/musnix;
         home-manager = import nixosModules/config/home-manager;
+        iamb = import nixosModules/config/iamb;
+        kernelModules = import nixosModules/config/kernelModules;
+        luksDevices = import nixosModules/config/luksDevices;
+        musnix = import nixosModules/config/musnix;
         neovim = import nixosModules/config/neovim;
         networking = import nixosModules/config/networking;
         nitrokey = import nixosModules/config/nitrokey;
@@ -84,37 +74,26 @@
         privoxy = import nixosModules/config/privoxy;
         searx = import nixosModules/config/searx;
         sops = import nixosModules/config/sops;
+        stateVersion = import nixosModules/config/stateVersion;
         sudo = import nixosModules/config/sudo;
-        system = import nixosModules/config/system;
+        swapDevices = import nixosModules/config/swapDevices;
         systemd-boot = import nixosModules/config/systemd-boot;
         texlive = import nixosModules/config/texlive;
+        timeZone = import nixosModules/config/timeZone;
         tor = import nixosModules/config/tor;
         ungoogled-chromium = import nixosModules/config/ungoogled-chromium;
         zsh = import nixosModules/config/zsh;
       };
       users = {
-        arcan = import nixosModules/users/arcan;
-        hbrs = import nixosModules/users/hbrs;
         nixos = import nixosModules/users/nixos;
         root = import nixosModules/users/root;
-        sbmr = import nixosModules/users/sbmr;
-        scdev = import nixosModules/users/scdev;
-      };
-      systems = {
-        tuxedo = import nixosModules/systems/tuxedo;
-        blackbox = import nixosModules/systems/blackbox;
-        epc = import nixosModules/systems/epc;
       };
     };
-  } // {
     nixosConfigurations = {
       tuxedo = nixpkgs.lib.nixosSystem {
-        inherit (self.systems.tuxedo) system;
-        specialArgs = inputs // {
-          inherit (self.systems.tuxedo) hostName system stateVersion;
-          mraethel = self;
-        };
-        modules = (with self.nixosModules.options; [
+        inherit (systems.tuxedo) system;
+        specialArgs = inputs // systems.tuxedo;
+        modules = (with nixosModules.options; [
           alacritty
           glirc
           iamb
@@ -128,11 +107,14 @@
           texlive
           ungoogled-chromium
           zsh
-        ]) ++ (with self.nixosModules.config; [
+        ]) ++ (with nixosModules.config; [
           alacritty
+          fileSystems
           glirc
           home-manager
           iamb
+          kernelModules
+          luksDevices
           musnix
           neovim
           networking
@@ -146,20 +128,17 @@
           privoxy
           searx
           sops
+          stateVersion
           sudo
-          system
           systemd-boot
           texlive
+          timeZone
           tor
           ungoogled-chromium
           zsh
-        ]) ++ (with self.nixosModules.users; [
-          arcan
-          hbrs
+        ]) ++ (with nixosModules.users; [
           nixos
           root
-          sbmr
-          scdev
         ]) ++ (with nixpkgs.nixosModules; [
           notDetected
         ]) ++ (with inputs.musnix.nixosModules; [
@@ -170,14 +149,11 @@
           default
         ]) ++ (with inputs.homeManager.nixosModules; [
           home-manager
-        ]) ++ [ self.nixosModules.systems.tuxedo ];
+        ]);
       };
       blackbox = nixpkgs.lib.nixosSystem {
         inherit (self.systems.blackbox) system;
-        specialArgs = inputs // {
-          inherit (self.systems.blackbox) hostName system stateVersion;
-          mraethel = self;
-        };
+        specialArgs = inputs // self.systems.blackbox;
         modules = (with self.nixosModules.options; [
           alacritty
           glirc
@@ -188,33 +164,34 @@
           zsh
         ]) ++ (with self.nixosModules.config; [
           alacritty
+          fileSystems
           glirc
           iamb
+          kernelModules
           neovim
           nitrokey
           openssh
           pipewire
           privoxy
           sops
+          stateVersion
           sudo
-          system
+          timeZone
           tor
           ungoogled-chromium
           zsh
         ]) ++ (with self.nixosModules.users; [
+          root
           nixos
         ]) ++ (with nixpkgs.nixosModules; [
           notDetected
         ]) ++ (with inputs.sops.nixosModules; [
           sops
-        ]) ++ [ self.nixosModules.systems.blackbox ];
+        ]);
       };
       epc = nixpkgs.lib.nixosSystem {
         inherit (self.systems.epc) system;
-        specialArgs = inputs // {
-          inherit (self.systems.epc) hostName system stateVersion;
-          mraethel = self;
-        };
+        specialArgs = inputs // self.systems.epc;
         modules = (with self.nixosModules.options; [
           alacritty
           neovim
@@ -223,27 +200,31 @@
           zsh
         ]) ++ (with self.nixosModules.config; [
           alacritty
+          fileSystems
+          kernelModules
           neovim
           nitrokey
           openssh
           pipewire
           privoxy
           sops
+          stateVersion
           sudo
-          system
+          swapDevices
+          timeZone
           tor
           ungoogled-chromium
           zsh
         ]) ++ (with self.nixosModules.users; [
+          root
           nixos
         ]) ++ (with nixpkgs.nixosModules; [
           notDetected
         ]) ++ (with inputs.sops.nixosModules; [
           sops
-        ]) ++ [ self.nixosModules.systems.epc ];
+        ]);
       };
     };
-  } // {
     homeModules = {
       options = {
         fossil = import homeModules/options/fossil;
@@ -254,13 +235,8 @@
         git = import homeModules/config/git;
         fossil = import homeModules/config/fossil;
       };
-      users = {
-        hbrs = import homeModules/users/hbrs;
-        sbmr = import homeModules/users/sbmr;
-        nixos = import homeModules/users/nixos;
-      };
+      users.nixos = import homeModules/users/nixos;
     };
-  } // {
     neovimModules = {
       config = {
         theme = import neovimModules/config/theme;
@@ -279,7 +255,10 @@
         languages = import neovimModules/config/languages/legacy;
       };
     };
-  } // flakeUtils.lib.eachDefaultSystem (system: {
+    overlays = {
+      ungoogled-chromium = import overlays/ungoogled-chromium;
+    };
+  } // flakeUtils.lib.eachDefaultSystem (system: rec {
     neovimConfigurations = let
       pkgs = import nixpkgs {
         inherit system;
@@ -313,11 +292,6 @@
         ]);
       };
     };
-  }) // {
-    overlays = {
-      ungoogled-chromium = import overlays/ungoogled-chromium;
-    };
-  } // flakeUtils.lib.eachDefaultSystem (system: {
     packages = let
       pkgs = import nixpkgs {
         inherit system;
@@ -327,7 +301,7 @@
       };
     in rec {
       inherit (pkgs) ungoogled-chromium;
-      neovim = self.neovimConfigurations.${ system }.default.neovim;
+      neovim = neovimConfigurations.default.neovim;
       texlive = pkgs.callPackage packages/texlive { };
       ploopy-udev = pkgs.callPackage packages/ploopy-udev { };
       sclang-with-superdirt = supercollider.packages.${ system }.sclang-with-superdirt.override {
@@ -351,11 +325,8 @@
         };
       };
     };
-  }) // flakeUtils.lib.eachDefaultSystem (system: {
     legacyPackages = let
-      pkgs = import nixpkgs {
-        inherit system;
-      };
+      pkgs = import nixpkgs { inherit system; };
     in rec {
       pianoteq = src: pkgs.callPackage legacyPackages/pianoteq { inherit src; };
       haskellPackages-glirc = pkgs.callPackage legacyPackages/haskellPackages/glirc { };

@@ -1,0 +1,4 @@
+{
+  timeZone,
+  ...
+}: { time.timeZone = timeZone; }

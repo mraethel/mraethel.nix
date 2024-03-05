@@ -9,10 +9,6 @@ creation_rules:
         - *tuxedo
         - *blackbox
         - *epc
-  - path_regex: secrets/systems/tuxedo.yaml
-    key_groups:
-      - age:
-        - *tuxedo
   - path_regex: secrets/systems/blackbox.yaml
     key_groups:
       - age:
@@ -21,7 +17,3 @@ creation_rules:
     key_groups:
       - age:
         - *epc
-  - path_regex: secrets/users/sbmr.yaml
-    key_groups:
-      - age:
-        - *tuxedo

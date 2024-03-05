@@ -1,0 +1,4 @@
+{
+  fileSystems,
+  ...
+}: { inherit fileSystems; }
