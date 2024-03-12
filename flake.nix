@@ -302,8 +302,8 @@
     in rec {
       inherit (pkgs) ungoogled-chromium;
       neovim = neovimConfigurations.default.neovim;
-      texlive = pkgs.callPackage packages/texlive { };
-      ploopy-udev = pkgs.callPackage packages/ploopy-udev { };
+      texlive = pkgs.callPackage pkgs/texlive { };
+      ploopy-udev = pkgs.callPackage pkgs/ploopy-udev { };
       sclang-with-superdirt = supercollider.packages.${ system }.sclang-with-superdirt.override {
         startupFile = supercollider.lib.${ system }.supercolliderQuarks.superdirt.startupFile.override { numWireBufs = 2*64; };
       };
@@ -311,7 +311,7 @@
         plugins = (with pkgs.supercolliderPlugins; [ sc3-plugins ]);
         quarks = (with supercollider.lib.${ system }.supercolliderQuarks; [ mraethel ]);
       };
-      sclang-with-mraethel = pkgs.callPackage packages/sclang-with-mraethel {
+      sclang-with-mraethel = pkgs.callPackage pkgs/sclang-with-mraethel {
         supercollider = supercollider-with-mraethel;
         startupFile = supercollider.lib.${ system }.supercolliderQuarks.superdirt.startupFile.override {
           numWireBufs = 2*64;
