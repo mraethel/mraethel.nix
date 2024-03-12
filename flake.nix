@@ -293,6 +293,7 @@
       };
     };
     packages = let
+      inherit (pkgs) callPackage;
       pkgs = import nixpkgs {
         inherit system;
         overlays = (with self.overlays; [
@@ -302,8 +303,8 @@
     in rec {
       inherit (pkgs) ungoogled-chromium;
       neovim = neovimConfigurations.default.neovim;
-      texlive = pkgs.callPackage pkgs/texlive { };
-      ploopy-udev = pkgs.callPackage pkgs/ploopy-udev { };
+      texlive = callPackage pkgs/texlive { };
+      ploopy-udev = callPackage pkgs/ploopy-udev { };
       sclang-with-superdirt = supercollider.packages.${ system }.sclang-with-superdirt.override {
         startupFile = supercollider.lib.${ system }.supercolliderQuarks.superdirt.startupFile.override { numWireBufs = 2*64; };
       };
@@ -311,7 +312,7 @@
         plugins = (with pkgs.supercolliderPlugins; [ sc3-plugins ]);
         quarks = (with supercollider.lib.${ system }.supercolliderQuarks; [ mraethel ]);
       };
-      sclang-with-mraethel = pkgs.callPackage pkgs/sclang-with-mraethel {
+      sclang-with-mraethel = callPackage pkgs/sclang-with-mraethel {
         supercollider = supercollider-with-mraethel;
         startupFile = supercollider.lib.${ system }.supercolliderQuarks.superdirt.startupFile.override {
           numWireBufs = 2*64;
@@ -326,10 +327,11 @@
       };
     };
     legacyPackages = let
+      inherit (pkgs) callPackage;
       pkgs = import nixpkgs { inherit system; };
     in rec {
-      pianoteq = src: pkgs.callPackage legacyPackages/pianoteq { inherit src; };
-      haskellPackages-glirc = pkgs.callPackage legacyPackages/haskellPackages/glirc { };
+      pianoteq = src: callPackage legacyPackages/pianoteq { inherit src; };
+      haskellPackages-glirc = callPackage legacyPackages/haskellPackages/glirc { };
       glirc = haskellPackages-glirc.glirc;
     };
   });
