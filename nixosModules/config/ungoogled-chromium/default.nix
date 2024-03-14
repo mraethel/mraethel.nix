@@ -2,7 +2,7 @@
   programs.chromium = {
     enable = true;
     usePrivoxy = true;
-    useSearx = true;
+    searx.enable = true;
     extraOpts = {
       AutofillAddressEnabled = false;
       AutofillCreditCardEnabled = false;
@@ -20,7 +20,6 @@
       ];
       HighEfficiencyModeEnabled = true;
       HttpsOnlyMode = "force_enabled";
-      HttpAllowlist = [ "[*.]onion" ];
       PasswordManagerEnabled = false;
       SavingBrowserHistoryDisabled = true;
       SyncDisabled = true;

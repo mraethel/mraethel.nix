@@ -47,7 +47,6 @@
         ploopy = import nixosModules/options/ploopy;
         pianoteq = import nixosModules/options/pianoteq;
         pipewire = import nixosModules/options/pipewire;
-        searx = import nixosModules/options/searx;
         sops = import nixosModules/options/sops;
         texlive = import nixosModules/options/texlive;
         ungoogled-chromium = import nixosModules/options/ungoogled-chromium;
@@ -72,7 +71,6 @@
         pipewire = import nixosModules/config/pipewire;
         ploopy = import nixosModules/config/ploopy;
         privoxy = import nixosModules/config/privoxy;
-        searx = import nixosModules/config/searx;
         sops = import nixosModules/config/sops;
         stateVersion = import nixosModules/config/stateVersion;
         sudo = import nixosModules/config/sudo;
@@ -102,7 +100,6 @@
           pianoteq
           pipewire
           ploopy
-          searx
           sops
           texlive
           ungoogled-chromium
@@ -126,7 +123,6 @@
           pipewire
           ploopy
           privoxy
-          searx
           sops
           stateVersion
           sudo
