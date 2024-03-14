@@ -20,6 +20,7 @@
       ];
       HighEfficiencyModeEnabled = true;
       HttpsOnlyMode = "force_enabled";
+      HttpAllowlist = [ "[*.]onion" ];
       PasswordManagerEnabled = false;
       SavingBrowserHistoryDisabled = true;
       SyncDisabled = true;
