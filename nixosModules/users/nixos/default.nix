@@ -1,5 +1,11 @@
 {
-  imports = [ ./home-manager ];
+  imports = [
+    ./git
+    ./home-manager
+  ];
 
-  users.users.nixos.isNormalUser = true;
+  users.users.nixos = {
+    isNormalUser = true;
+    extraGroups = [ "keys" ];
+  };
 }

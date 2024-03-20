@@ -7,7 +7,6 @@
       "nix-command"
       "flakes"
     ];
-    includes = [ config.sops.secrets.github_pat.path ];
+    includes = [ config.sops.secrets."nix/pat".path ];
   };
-  sops.secrets.github_pat = { };
 }
