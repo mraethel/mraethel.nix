@@ -27,6 +27,7 @@
     legacyNeovim,
     nixpkgs,
     self,
+    homeManager,
     supercollider,
     tidalcycles,
     flakeUtils,
@@ -143,14 +144,14 @@
           sops
         ]) ++ (with inputs.nixServeNG.nixosModules; [
           default
-        ]) ++ (with inputs.homeManager.nixosModules; [
+        ]) ++ (with homeManager.nixosModules; [
           home-manager
         ]);
       };
       blackbox = nixpkgs.lib.nixosSystem {
-        inherit (self.systems.blackbox) system;
-        specialArgs = inputs // self.systems.blackbox;
-        modules = (with self.nixosModules.options; [
+        inherit (systems.blackbox) system;
+        specialArgs = inputs // systems.blackbox;
+        modules = (with nixosModules.options; [
           alacritty
           glirc
           iamb
@@ -158,7 +159,7 @@
           sops
           ungoogled-chromium
           zsh
-        ]) ++ (with self.nixosModules.config; [
+        ]) ++ (with nixosModules.config; [
           alacritty
           fileSystems
           glirc
@@ -176,7 +177,7 @@
           tor
           ungoogled-chromium
           zsh
-        ]) ++ (with self.nixosModules.users; [
+        ]) ++ (with nixosModules.users; [
           root
           nixos
         ]) ++ (with nixpkgs.nixosModules; [
@@ -186,20 +187,25 @@
         ]);
       };
       epc = nixpkgs.lib.nixosSystem {
-        inherit (self.systems.epc) system;
-        specialArgs = inputs // self.systems.epc;
-        modules = (with self.nixosModules.options; [
+        inherit (systems.epc) system;
+        specialArgs = inputs // systems.epc;
+        modules = (with nixosModules.options; [
           alacritty
           neovim
+          nix
+          pipewire
           sops
           ungoogled-chromium
           zsh
-        ]) ++ (with self.nixosModules.config; [
+        ]) ++ (with nixosModules.config; [
           alacritty
           fileSystems
+          home-manager
           kernelModules
           neovim
+          networking
           nitrokey
+          nix
           openssh
           pipewire
           privoxy
@@ -211,13 +217,15 @@
           tor
           ungoogled-chromium
           zsh
-        ]) ++ (with self.nixosModules.users; [
-          root
+        ]) ++ (with nixosModules.users; [
           nixos
+          root
         ]) ++ (with nixpkgs.nixosModules; [
           notDetected
         ]) ++ (with inputs.sops.nixosModules; [
           sops
+        ]) ++ (with homeManager.nixosModules; [
+          home-manager
         ]);
       };
     };
