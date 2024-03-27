@@ -3,6 +3,10 @@
     enable = true;
     usePrivoxy = true;
     searx.enable = true;
+    ManagedBookmarks = [{
+      name = "NixOS";
+      url = "https://search.nixos.org";
+    }];
     extraOpts = {
       AutofillAddressEnabled = false;
       AutofillCreditCardEnabled = false;
@@ -23,10 +27,6 @@
       PasswordManagerEnabled = false;
       SavingBrowserHistoryDisabled = true;
       SyncDisabled = true;
-      ManagedBookmarks = [{
-        name = "NixOS";
-        url = "search.nixos.org";
-      }];
     };
   };
 }
