@@ -23,6 +23,10 @@
       PasswordManagerEnabled = false;
       SavingBrowserHistoryDisabled = true;
       SyncDisabled = true;
+      ManagedBookmarks = [{
+        name = "NixOS";
+        url = "search.nixos.org";
+      }];
     };
   };
 }

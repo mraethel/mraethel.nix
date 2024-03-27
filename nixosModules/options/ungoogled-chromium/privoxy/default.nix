@@ -12,14 +12,11 @@ in {
     };
   };
 
-  config.programs.chromium = lib.mkIf cfg.usePrivoxy {
-    extraOpts =  {
-      ProxySettings = {
-        ProxyMode = "fixed_servers";
-        ProxyServer = "http://${ config.services.privoxy.settings.listen-address }";
-      };
-      HttpAllowlist = lib.optionals (config.services.privoxy.enableTor) [ "[*.]onion" ];
+  config.programs.chromium.extraOpts = lib.optionalAttrs cfg.usePrivoxy {
+    ProxySettings = {
+      ProxyMode = "fixed_servers";
+      ProxyServer = "http://${ config.services.privoxy.settings.listen-address }";
     };
-    searx.domain = lib.mkDefault "http://privateoz3u5utrimal2edr56j3r5caakektxxgixigdkycuxigvquid.onion";
+    HttpAllowlist = lib.optionals (config.services.privoxy.enableTor) [ "[*.]onion" ];
   };
 }
