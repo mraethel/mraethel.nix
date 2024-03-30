@@ -15,6 +15,6 @@ in {
       "nixos/pat" = { owner = config.users.users.nixos.name; };
     };
   };
-  services.openssh.hostKeys = [{ inherit (sshKey) path type; }];
+  services.openssh.hostKeys = [ sshKey ];
   programs.sops.enable = true;
 }

@@ -5,4 +5,5 @@
   timeZone = "Europe/Berlin";
   fileSystems = import ./fileSystems;
   kernelModules = import ./kernelModules;
-  }
+  grubDevice = "/dev/sda";
+}

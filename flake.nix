@@ -35,7 +35,7 @@
   }: rec {
     systems = {
       tuxedo = import systems/tuxedo;
-      blackbox = import systems/tuxedo;
+      blackbox = import systems/blackbox;
       epc = import systems/epc;
     };
     nixosModules = {
@@ -57,6 +57,7 @@
         alacritty = import nixosModules/config/alacritty;
         fileSystems = import nixosModules/config/fileSystems;
         glirc = import nixosModules/config/glirc;
+        grub = import nixosModules/config/grub;
         home-manager = import nixosModules/config/home-manager;
         iamb = import nixosModules/config/iamb;
         kernelModules = import nixosModules/config/kernelModules;
@@ -156,6 +157,7 @@
           glirc
           iamb
           neovim
+          nix
           sops
           ungoogled-chromium
           zsh
@@ -163,10 +165,14 @@
           alacritty
           fileSystems
           glirc
+          grub
+          home-manager
           iamb
           kernelModules
           neovim
+          networking
           nitrokey
+          nix
           openssh
           pipewire
           privoxy
@@ -184,6 +190,8 @@
           notDetected
         ]) ++ (with inputs.sops.nixosModules; [
           sops
+        ]) ++ (with homeManager.nixosModules; [
+          home-manager
         ]);
       };
       epc = nixpkgs.lib.nixosSystem {
