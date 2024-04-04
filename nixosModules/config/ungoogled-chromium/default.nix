@@ -26,6 +26,7 @@
       HttpsOnlyMode = "force_enabled";
       PasswordManagerEnabled = false;
       SavingBrowserHistoryDisabled = true;
+      ShowHomeButton = true;
       SyncDisabled = true;
     };
   };
