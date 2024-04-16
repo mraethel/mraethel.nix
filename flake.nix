@@ -251,16 +251,17 @@
     };
     neovimModules = {
       config = {
-        theme = import neovimModules/config/theme;
-        lualine = import neovimModules/config/lualine;
         git = import neovimModules/config/git;
-        tidal = import neovimModules/config/tidal;
-        telescope = import neovimModules/config/telescope;
-        treesitter = import neovimModules/config/treesitter;
         languages = import neovimModules/config/languages;
-        nvimTree = import neovimModules/config/nvimTree;
+        lualine = import neovimModules/config/lualine;
         nvimBufferline = import neovimModules/config/nvimBufferline;
+        nvimTree = import neovimModules/config/nvimTree;
         nvimWebDevicons = import neovimModules/config/nvimWebDevicons; # TODO: enable if nvimBufferline is enabled
+        tabWidth = import neovimModules/config/tabWidth;
+        telescope = import neovimModules/config/telescope;
+        theme = import neovimModules/config/theme;
+        tidal = import neovimModules/config/tidal;
+        treesitter = import neovimModules/config/treesitter;
       };
       legacyConfig = {
         nvimTree = import neovimModules/config/nvimTree/legacy;
@@ -280,14 +281,15 @@
       default = inputs.neovim.lib.neovimConfiguration {
         inherit pkgs;
         modules = (with self.neovimModules.config; [
+          git
+          languages
+          lualine
           nvimTree
+          tabWidth
+          telescope
           theme
           tidal
-          lualine
-          git
-          telescope
           treesitter
-          languages
         ]);
       };
       legacy = legacyNeovim.lib.neovimConfiguration {

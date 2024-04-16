@@ -1,0 +1,1 @@
+{ vim.tabWidth = 2; }
