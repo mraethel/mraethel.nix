@@ -6,6 +6,9 @@
 
   users.users.nixos = {
     isNormalUser = true;
-    extraGroups = [ "keys" ];
+    extraGroups = [
+      "keys"
+      "wheel"
+    ];
   };
 }
