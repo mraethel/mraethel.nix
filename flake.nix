@@ -2,11 +2,9 @@
   inputs = {
     homeManager.url = "github:nix-community/home-manager";
 
-    legacyNeovim.url = "github:jordanisaacs/neovim-flake";
-
     musnix.url = "github:musnix/musnix";
 
-    neovim.url = "github:notashelf/neovim-flake";
+    nixvim.url = "github:nix-community/nixvim";
 
     nixServeNG.url = "github:aristanetworks/nix-serve-ng";
 
@@ -24,7 +22,6 @@
   };
 
   outputs = inputs @ {
-    legacyNeovim,
     nixpkgs,
     self,
     homeManager,
@@ -43,13 +40,11 @@
         alacritty = import nixosModules/options/alacritty;
         glirc = import nixosModules/options/glirc;
         iamb = import nixosModules/options/iamb;
-        neovim = import nixosModules/options/neovim;
         nix = import nixosModules/options/nix;
-        ploopy = import nixosModules/options/ploopy;
         pianoteq = import nixosModules/options/pianoteq;
         pipewire = import nixosModules/options/pipewire;
+        ploopy = import nixosModules/options/ploopy;
         sops = import nixosModules/options/sops;
-        texlive = import nixosModules/options/texlive;
         ungoogled-chromium = import nixosModules/options/ungoogled-chromium;
         zsh = import nixosModules/options/zsh;
       };
@@ -63,11 +58,11 @@
         kernelModules = import nixosModules/config/kernelModules;
         luksDevices = import nixosModules/config/luksDevices;
         musnix = import nixosModules/config/musnix;
-        neovim = import nixosModules/config/neovim;
         networking = import nixosModules/config/networking;
         nitrokey = import nixosModules/config/nitrokey;
         nix = import nixosModules/config/nix;
         nix-serve = import nixosModules/config/nix-serve;
+        nixvim = import nixosModules/config/nixvim;
         openssh = import nixosModules/config/openssh;
         pianoteq = import nixosModules/config/pianoteq;
         pipewire = import nixosModules/config/pipewire;
@@ -78,7 +73,6 @@
         sudo = import nixosModules/config/sudo;
         swapDevices = import nixosModules/config/swapDevices;
         systemd-boot = import nixosModules/config/systemd-boot;
-        texlive = import nixosModules/config/texlive;
         timeZone = import nixosModules/config/timeZone;
         tor = import nixosModules/config/tor;
         ungoogled-chromium = import nixosModules/config/ungoogled-chromium;
@@ -97,13 +91,11 @@
           alacritty
           glirc
           iamb
-          neovim
           nix
           pianoteq
           pipewire
           ploopy
           sops
-          texlive
           ungoogled-chromium
           zsh
         ]) ++ (with nixosModules.config; [
@@ -115,11 +107,11 @@
           kernelModules
           luksDevices
           musnix
-          neovim
           networking
           nitrokey
           nix
           nix-serve
+          nixvim
           openssh
           pianoteq
           pipewire
@@ -129,7 +121,6 @@
           stateVersion
           sudo
           systemd-boot
-          texlive
           timeZone
           tor
           ungoogled-chromium
@@ -147,6 +138,8 @@
           default
         ]) ++ (with homeManager.nixosModules; [
           home-manager
+        ]) ++ (with inputs.nixvim.nixosModules; [
+          nixvim
         ]);
       };
       blackbox = nixpkgs.lib.nixosSystem {
@@ -156,7 +149,6 @@
           alacritty
           glirc
           iamb
-          neovim
           nix
           sops
           ungoogled-chromium
@@ -169,10 +161,10 @@
           home-manager
           iamb
           kernelModules
-          neovim
           networking
           nitrokey
           nix
+          nixvim
           openssh
           pipewire
           privoxy
@@ -192,6 +184,8 @@
           sops
         ]) ++ (with homeManager.nixosModules; [
           home-manager
+        ]) ++ (with inputs.nixvim.nixosModules; [
+          nixvim
         ]);
       };
       epc = nixpkgs.lib.nixosSystem {
@@ -199,7 +193,6 @@
         specialArgs = inputs // systems.epc;
         modules = (with nixosModules.options; [
           alacritty
-          neovim
           nix
           pipewire
           sops
@@ -210,10 +203,10 @@
           fileSystems
           home-manager
           kernelModules
-          neovim
           networking
           nitrokey
           nix
+          nixvim
           openssh
           pipewire
           privoxy
@@ -234,6 +227,8 @@
           sops
         ]) ++ (with homeManager.nixosModules; [
           home-manager
+        ]) ++ (with inputs.nixvim.nixosModules; [
+          nixvim
         ]);
       };
     };
@@ -249,63 +244,10 @@
       };
       users.nixos = import homeModules/users/nixos;
     };
-    neovimModules = {
-      config = {
-        git = import neovimModules/config/git;
-        languages = import neovimModules/config/languages;
-        lualine = import neovimModules/config/lualine;
-        nvimBufferline = import neovimModules/config/nvimBufferline;
-        nvimTree = import neovimModules/config/nvimTree;
-        nvimWebDevicons = import neovimModules/config/nvimWebDevicons; # TODO: enable if nvimBufferline is enabled
-        tabWidth = import neovimModules/config/tabWidth;
-        telescope = import neovimModules/config/telescope;
-        theme = import neovimModules/config/theme;
-        tidal = import neovimModules/config/tidal;
-        treesitter = import neovimModules/config/treesitter;
-      };
-      legacyConfig = {
-        nvimTree = import neovimModules/config/nvimTree/legacy;
-        languages = import neovimModules/config/languages/legacy;
-      };
-    };
     overlays = {
       ungoogled-chromium = import overlays/ungoogled-chromium;
     };
-  } // flakeUtils.lib.eachDefaultSystem (system: rec {
-    neovimConfigurations = let
-      pkgs = import nixpkgs {
-        inherit system;
-        overlays = (with tidalcycles.overlays; [ tidal ]);
-      };
-    in {
-      default = inputs.neovim.lib.neovimConfiguration {
-        inherit pkgs;
-        modules = (with self.neovimModules.config; [
-          git
-          languages
-          lualine
-          nvimTree
-          tabWidth
-          telescope
-          theme
-          tidal
-          treesitter
-        ]);
-      };
-      legacy = legacyNeovim.lib.neovimConfiguration {
-        inherit pkgs;
-        modules = (with self.neovimModules.config; [
-          theme
-          lualine
-          git
-          telescope
-          treesitter
-        ]) ++ (with self.neovimModules.legacyConfig; [
-          nvimTree
-          languages
-        ]);
-      };
-    };
+  } // flakeUtils.lib.eachDefaultSystem (system: {
     packages = let
       inherit (pkgs) callPackage;
       pkgs = import nixpkgs {
@@ -316,7 +258,6 @@
       };
     in rec {
       inherit (pkgs) ungoogled-chromium;
-      neovim = neovimConfigurations.default.neovim;
       texlive = callPackage pkgs/texlive { };
       ploopy-udev = callPackage pkgs/ploopy-udev { };
       sclang-with-superdirt = supercollider.packages.${ system }.sclang-with-superdirt.override {
