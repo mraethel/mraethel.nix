@@ -13,6 +13,7 @@ in {
     secrets = {
       "nix/pat" = { };
       "nixos/pat" = { owner = config.users.users.nixos.name; };
+      "aichat/config.yaml" = { group = config.users.groups.users.name; };
     };
   };
   services.openssh.hostKeys = [ sshKey ];
