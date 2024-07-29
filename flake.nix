@@ -34,6 +34,7 @@
       tuxedo = import systems/tuxedo;
       blackbox = import systems/blackbox;
       epc = import systems/epc;
+      donet = import systems/donet;
     };
     nixosModules = {
       options = {
@@ -227,6 +228,35 @@
           sops
         ]) ++ (with homeManager.nixosModules; [
           home-manager
+        ]) ++ (with inputs.nixvim.nixosModules; [
+          nixvim
+        ]);
+      };
+      donet = nixpkgs.lib.nixosSystem {
+        inherit (systems.donet) system;
+        specialArgs = inputs // systems.donet;
+        modules = (with nixosModules.options; [
+          nix
+          sops
+          zsh
+        ]) ++ (with nixosModules.config; [
+          fileSystems
+          kernelModules
+          luksDevices
+          nix
+          nixvim
+          openssh
+          sops
+          stateVersion
+          swapDevices
+          systemd-boot
+          timeZone
+          zsh
+        ]) ++ (with nixosModules.users; [
+          nixos
+          root
+        ]) ++ (with inputs.sops.nixosModules; [
+          sops
         ]) ++ (with inputs.nixvim.nixosModules; [
           nixvim
         ]);
