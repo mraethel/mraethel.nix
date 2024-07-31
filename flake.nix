@@ -241,6 +241,7 @@
           zsh
         ]) ++ (with nixosModules.config; [
           fileSystems
+          home-manager
           kernelModules
           luksDevices
           nix
@@ -257,6 +258,8 @@
           root
         ]) ++ (with inputs.sops.nixosModules; [
           sops
+        ]) ++ (with homeManager.nixosModules; [
+          home-manager
         ]) ++ (with inputs.nixvim.nixosModules; [
           nixvim
         ]);
