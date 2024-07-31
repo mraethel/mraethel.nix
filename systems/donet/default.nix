@@ -1,5 +1,5 @@
 {
-  hostname = "donet";
+  hostName = "donet";
   system = "x86_64-linux";
   stateVersion = "24.05";
   timeZone = "Europe/Berlin";

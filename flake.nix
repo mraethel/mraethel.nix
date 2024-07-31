@@ -245,6 +245,7 @@
           home-manager
           kernelModules
           luksDevices
+          networking
           nix
           nixvim
           openssh
