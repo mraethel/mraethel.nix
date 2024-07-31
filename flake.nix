@@ -236,6 +236,7 @@
         inherit (systems.donet) system;
         specialArgs = inputs // systems.donet;
         modules = (with nixosModules.options; [
+          alacritty # -> nixosModules.config.zsh
           nix
           sops
           zsh
