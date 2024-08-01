@@ -69,6 +69,7 @@
         pipewire = import nixosModules/config/pipewire;
         ploopy = import nixosModules/config/ploopy;
         privoxy = import nixosModules/config/privoxy;
+        qemuGuest = import nixosModules/config/qemuGuest;
         sops = import nixosModules/config/sops;
         stateVersion = import nixosModules/config/stateVersion;
         sudo = import nixosModules/config/sudo;
@@ -249,6 +250,7 @@
           nix
           nixvim
           openssh
+          qemuGuest
           sops
           stateVersion
           sudo
