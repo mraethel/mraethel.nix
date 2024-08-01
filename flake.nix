@@ -251,6 +251,7 @@
           openssh
           sops
           stateVersion
+          sudo
           swapDevices
           systemd-boot
           timeZone
