@@ -8,4 +8,13 @@
     "sr_mod"
     "virtio_blk"
   ];
+  network = {
+    enable = true;
+    ssh = {
+      enable = true;
+      shell = "/bin/cryptsetup-askpass";
+      authorizedKeyFiles = [ ./authorized_keys ];
+      hostKeys = [ "/etc/ssh/ssh_initrd_ed25519_key" ];
+    };
+  };
 }
