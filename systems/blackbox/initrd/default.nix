@@ -1,5 +1,5 @@
 {
-  initrd.availableKernelModules = [
+  availableKernelModules = [
     "ahci"
     "ehci_pci"
     "firewire_ohci"
@@ -11,5 +11,4 @@
     "usbhid"
     "xhci_pci"
   ];
-  kernelModules = [ "kvm-amd" ];
 }

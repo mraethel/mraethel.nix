@@ -1,4 +1,4 @@
 {
   kernelModules,
   ...
-}: { boot = kernelModules; }
+}: { boot.kernelModules = kernelModules; }

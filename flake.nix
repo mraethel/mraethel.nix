@@ -56,6 +56,7 @@
         grub = import nixosModules/config/grub;
         home-manager = import nixosModules/config/home-manager;
         iamb = import nixosModules/config/iamb;
+        initrd = import nixosModules/config/initrd;
         kernelModules = import nixosModules/config/kernelModules;
         luksDevices = import nixosModules/config/luksDevices;
         musnix = import nixosModules/config/musnix;
@@ -106,6 +107,7 @@
           glirc
           home-manager
           iamb
+          initrd
           kernelModules
           luksDevices
           musnix
@@ -162,6 +164,7 @@
           grub
           home-manager
           iamb
+          initrd
           kernelModules
           networking
           nitrokey
@@ -204,7 +207,7 @@
           alacritty
           fileSystems
           home-manager
-          kernelModules
+          initrd
           networking
           nitrokey
           nix
@@ -244,7 +247,7 @@
         ]) ++ (with nixosModules.config; [
           fileSystems
           home-manager
-          kernelModules
+          initrd
           luksDevices
           networking
           nix

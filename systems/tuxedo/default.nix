@@ -4,6 +4,7 @@
   stateVersion = "23.11";
   timeZone = "Europe/Berlin";
   fileSystems = import ./fileSystems;
-  kernelModules = import ./kernelModules;
+  kernelModules = [ "kvm-amd" ];
+  initrd = import ./initrd;
   luksDevices = import ./luksDevices;
 }

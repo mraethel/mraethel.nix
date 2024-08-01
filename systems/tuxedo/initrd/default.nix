@@ -1,6 +1,5 @@
 {
-  kernelModules = [ "kvm-amd" ];
-  initrd.availableKernelModules = [
+  availableKernelModules = [
     "ahci"
     "nvme"
     "rtsx_usb_sdmmc"

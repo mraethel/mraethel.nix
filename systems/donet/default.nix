@@ -4,7 +4,7 @@
   stateVersion = "24.05";
   timeZone = "Europe/Berlin";
   fileSystems = import ./fileSystems;
-  kernelModules = import ./kernelModules;
+  initrd = import ./initrd;
   luksDevices = import ./luksDevices;
   swapDevices = import ./swapDevices;
 }

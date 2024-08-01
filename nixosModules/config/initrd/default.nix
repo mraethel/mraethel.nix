@@ -1,0 +1,4 @@
+{
+  initrd,
+  ...
+}: { boot.initrd = initrd; }

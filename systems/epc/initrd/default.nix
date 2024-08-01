@@ -1,5 +1,5 @@
 {
-  initrd.availableKernelModules = [
+  availableKernelModules = [
     "ahci"
     "ehci_pci"
     "sd_mod"
