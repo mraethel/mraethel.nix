@@ -46,6 +46,7 @@
         pipewire = import nixosModules/options/pipewire;
         ploopy = import nixosModules/options/ploopy;
         sops = import nixosModules/options/sops;
+        ssh = import nixosModules/options/ssh;
         ungoogled-chromium = import nixosModules/options/ungoogled-chromium;
         zsh = import nixosModules/options/zsh;
       };
@@ -100,6 +101,7 @@
           pipewire
           ploopy
           sops
+          ssh
           ungoogled-chromium
           zsh
         ]) ++ (with nixosModules.config; [
@@ -242,7 +244,7 @@
         inherit (systems.donet) system;
         specialArgs = inputs // systems.donet;
         modules = (with nixosModules.options; [
-          alacritty # -> nixosModules.config.zsh
+          alacritty # depOf nixosModules.config.zsh
           nix
           sops
           zsh
