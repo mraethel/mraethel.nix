@@ -72,6 +72,7 @@
         privoxy = import nixosModules/config/privoxy;
         qemuGuest = import nixosModules/config/qemuGuest;
         sops = import nixosModules/config/sops;
+        ssh = import nixosModules/config/ssh;
         stateVersion = import nixosModules/config/stateVersion;
         sudo = import nixosModules/config/sudo;
         swapDevices = import nixosModules/config/swapDevices;
@@ -122,6 +123,7 @@
           ploopy
           privoxy
           sops
+          ssh
           stateVersion
           sudo
           systemd-boot
