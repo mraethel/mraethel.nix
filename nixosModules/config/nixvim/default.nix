@@ -32,7 +32,6 @@
       telescope.enable = true;
       lsp.servers.hls.enable = true;
       treesitter-context.enable = true;
-      treesitter-refactor.enable = true;
       nix.enable = true;
       cmp-nvim-lsp.enable = true;
       neogit.enable = true;
