@@ -37,6 +37,7 @@
       nix.enable = true;
       cmp.enable = true;
       cmp-nvim-lsp.enable = true;
+      neogit.enable = true;
       
       vimtex = {
         enable = true;
