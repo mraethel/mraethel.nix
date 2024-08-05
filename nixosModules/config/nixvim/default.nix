@@ -29,7 +29,6 @@
 
     plugins = {
       lualine.enable = true;
-      bufferline.enable = true;
       telescope.enable = true;
       lsp.servers.hls.enable = true;
       treesitter-context.enable = true;
