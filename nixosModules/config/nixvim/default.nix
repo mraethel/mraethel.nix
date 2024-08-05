@@ -39,6 +39,7 @@
       cmp-nvim-lsp.enable = true;
       neogit.enable = true;
       diffview.enable = true;
+      gitmessenger.enable = true;
       
       vimtex = {
         enable = true;
