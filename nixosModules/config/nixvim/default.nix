@@ -35,11 +35,15 @@
       treesitter-context.enable = true;
       treesitter-refactor.enable = true;
       nix.enable = true;
-      cmp.enable = true;
       cmp-nvim-lsp.enable = true;
       neogit.enable = true;
       diffview.enable = true;
       gitmessenger.enable = true;
+      
+      cmp = {
+        enable = true;
+        settings.sources = [{ name = "nvim_lsp"; }];
+      };
       
       vimtex = {
         enable = true;
