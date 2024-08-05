@@ -30,17 +30,31 @@
     plugins = {
       lualine.enable = true;
       telescope.enable = true;
-      lsp.servers.hls.enable = true;
       treesitter-context.enable = true;
       nix.enable = true;
       cmp-nvim-lsp.enable = true;
+      cmp-buffer.enable = true;
       neogit.enable = true;
       diffview.enable = true;
       gitmessenger.enable = true;
       
+      lsp = {
+        enable = true;
+        servers = {
+          hls.enable = true;
+          nixd.enable = true;
+        };
+      };
+
       cmp = {
         enable = true;
-        settings.sources = [{ name = "nvim_lsp"; }];
+        settings.sources = [
+          { name = "nvim_lsp"; }
+          {
+            name = "buffer";
+            option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
+          }
+        ];
       };
       
       vimtex = {
