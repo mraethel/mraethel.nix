@@ -48,6 +48,8 @@
         servers = {
           hls.enable = true;
           nixd.enable = true;
+#         jdtls.enable = true;
+          kotlin-language-server.enable = true;
         };
       };
 
