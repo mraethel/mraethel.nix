@@ -23,6 +23,9 @@
         flavour = "mocha";
         integrations = {
           lualine.enable = true;
+          cmp = true;
+          treesitter = true;
+          nvimtree = true;
         };
       };
     };
