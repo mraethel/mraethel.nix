@@ -25,7 +25,6 @@
           lualine.enable = true;
           cmp = true;
           treesitter = true;
-          treesitter-context = true;
           telescope.enabled = true;
           nvimtree = true;
           native_lsp.enabled = true;
