@@ -25,7 +25,10 @@
           lualine.enable = true;
           cmp = true;
           treesitter = true;
+          treesitter-context = true;
+          telescope.enabled = true;
           nvimtree = true;
+          native_lsp.enabled = true;
         };
       };
     };
@@ -59,6 +62,7 @@
           sources = [
             { name = "nvim_lsp"; }
             { name = "luasnip"; }
+            { name = "treesitter"; }
             {
               name = "buffer";
               option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
@@ -97,6 +101,7 @@
       treesitter = {
         enable = true;
         folding = true;
+        settings.highlight.enable = true;
       };
     };
   };

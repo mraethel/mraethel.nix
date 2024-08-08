@@ -26,7 +26,6 @@
     self,
     homeManager,
     supercollider,
-    tidalcycles,
     flakeUtils,
     ...
   }: rec {
