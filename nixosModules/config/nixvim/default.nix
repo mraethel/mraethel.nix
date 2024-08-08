@@ -51,7 +51,7 @@
         servers = {
           hls.enable = true;
           nixd.enable = true;
-#         jdtls.enable = true;
+          jdt-language-server.enable = true;
           kotlin-language-server.enable = true;
         };
       };
