@@ -53,6 +53,13 @@
           jdt-language-server.enable = true;
           kotlin-language-server.enable = true;
         };
+        keymaps.lspBuf = {
+          K = "hover";
+          gD = "references";
+          gd = "definition";
+          gi = "implementation";
+          gt = "type_definition";
+        };
       };
 
       cmp = {
