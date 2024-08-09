@@ -34,7 +34,6 @@
 
     plugins = {
       lualine.enable = true;
-      telescope.enable = true;
       treesitter-context.enable = true;
       nix.enable = true;
       cmp-nvim-lsp.enable = true;
@@ -45,6 +44,18 @@
       diffview.enable = true;
       gitmessenger.enable = true;
       
+      telescope = {
+        enable = true;
+        extensions = {
+          file-browser.enable = true;
+          frecency.enable = true;
+          media-files.enable = true;
+          ui-select.enable = true;
+          undo.enable = true;
+        };
+        keymaps."<leader>fg" = "live_grep";
+      };
+
       lsp = {
         enable = true;
         servers = {
