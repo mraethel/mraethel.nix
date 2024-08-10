@@ -14,7 +14,7 @@
 
     supercollider.url = "github:mraethel/supercollider.nix";
 
-    tidalcycles.url = "github:mitchmindtree/tidalcycles.nix";
+    simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
 
     flakeUtils.url = "github:numtide/flake-utils";
     flakeUtils.inputs.systems.follows = "systems";
@@ -59,6 +59,7 @@
         initrd = import nixosModules/config/initrd;
         kernelModules = import nixosModules/config/kernelModules;
         luksDevices = import nixosModules/config/luksDevices;
+        mailserver = import nixosModules/config/mailserver;
         musnix = import nixosModules/config/musnix;
         networking = import nixosModules/config/networking;
         nitrokey = import nixosModules/config/nitrokey;
@@ -252,6 +253,7 @@
           home-manager
           initrd
           luksDevices
+          mailserver
           networking
           nix
           nixvim
@@ -273,6 +275,8 @@
           home-manager
         ]) ++ (with inputs.nixvim.nixosModules; [
           nixvim
+        ]) ++ (with inputs.simple-nixos-mailserver.nixosModules; [
+          mailserver
         ]);
       };
     };

@@ -14,6 +14,8 @@ in {
       "nix/pat" = { };
       "nixos/pat" = { owner = config.users.users.nixos.name; };
       "aichat/config.yaml" = { group = config.users.groups.users.name; };
+      "mailserver/mail@mraethel.de" = { };
+      "mailserver/vault@mraethel.de" = { };
     };
   };
   services.openssh.hostKeys = [ sshKey ];

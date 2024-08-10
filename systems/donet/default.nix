@@ -7,4 +7,5 @@
   initrd = import ./initrd;
   luksDevices = import ./luksDevices;
   swapDevices = import ./swapDevices;
+  mailserver = import ./mailserver;
 }
