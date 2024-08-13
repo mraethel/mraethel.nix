@@ -43,6 +43,7 @@
       neogit.enable = true;
       diffview.enable = true;
       gitmessenger.enable = true;
+      rustaceanvim.enable = true;
       
       telescope = {
         enable = true;
@@ -63,6 +64,11 @@
           nixd.enable = true;
           jdt-language-server.enable = true;
           kotlin-language-server.enable = true;
+          rust-analyzer = {
+            enable = true;
+            installCargo = true;
+            installRustc = true;
+          };
         };
         keymaps.lspBuf = {
           K = "hover";
