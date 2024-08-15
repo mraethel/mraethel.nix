@@ -1,5 +1,4 @@
 {
-  hostName = "donet";
   system = "x86_64-linux";
   stateVersion = "24.05";
   timeZone = "Europe/Berlin";
@@ -8,4 +7,5 @@
   luksDevices = import ./luksDevices;
   swapDevices = import ./swapDevices;
   mailserver = import ./mailserver;
+  networking = import ./networking;
 }

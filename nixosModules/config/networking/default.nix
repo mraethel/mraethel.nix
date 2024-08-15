@@ -1,7 +1,7 @@
 {
-  hostName,
+  networking,
   ...
 }: {
-  networking.hostName = hostName;
+  inherit networking;
   services.resolved.enable = true;
 }
