@@ -44,7 +44,24 @@
       neogit.enable = true;
       diffview.enable = true;
       gitmessenger.enable = true;
-      rustaceanvim.enable = true;
+      rustaceanvim = {
+        enable = true;
+        settings = {
+          cmd = [
+            "rustup"
+            "run"
+            "nigtly"
+            "rust-analyzer"
+          ];
+          default_settings = {
+            rust-analyzer = {
+              check.command = "clippy";
+              inlayHints.lifetimeElisionHints.enable = "always";
+            };
+            standalone = false;
+          };
+        };
+      };
       
       telescope = {
         enable = true;
@@ -65,11 +82,11 @@
           nixd.enable = true;
           jdt-language-server.enable = true;
           kotlin-language-server.enable = true;
-          rust-analyzer = {
-            enable = true;
-            installCargo = true;
-            installRustc = true;
-          };
+#         rust-analyzer = {
+#           enable = true;
+#           installCargo = true;
+#           installRustc = true;
+#         };
         };
         keymaps.lspBuf = {
           K = "hover";
