@@ -15,6 +15,7 @@
       relativenumber = true;
       shiftwidth = 0;
       tabstop = 2;
+      signcolumn = "yes";
     };
 
     colorschemes.catppuccin = {
