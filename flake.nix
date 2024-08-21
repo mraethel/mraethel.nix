@@ -38,6 +38,7 @@
     nixosModules = {
       options = {
         alacritty = import nixosModules/options/alacritty;
+        conduit = import nixosModules/options/conduit;
         glirc = import nixosModules/options/glirc;
         iamb = import nixosModules/options/iamb;
         nix = import nixosModules/options/nix;
@@ -245,6 +246,7 @@
         specialArgs = inputs // systems.donet;
         modules = (with nixosModules.options; [
           alacritty # depOf nixosModules.config.zsh
+          conduit
           nix
           sops
           zsh
