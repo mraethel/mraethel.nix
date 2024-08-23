@@ -308,6 +308,7 @@
       };
     in rec {
       inherit (pkgs) ungoogled-chromium;
+      iamb = callPackage pkgs/iamb { };
       texlive = callPackage pkgs/texlive { };
       ploopy-udev = callPackage pkgs/ploopy-udev { };
       sclang-with-superdirt = supercollider.packages.${ system }.sclang-with-superdirt.override {
