@@ -99,7 +99,6 @@
           iamb
           nix
           pianoteq
-          pipewire
           ploopy
           sops
           ssh
@@ -204,7 +203,6 @@
         modules = (with nixosModules.options; [
           alacritty
           nix
-          pipewire
           sops
           ungoogled-chromium
           zsh
