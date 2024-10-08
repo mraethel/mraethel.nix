@@ -21,13 +21,12 @@
     systems.url = "github:nix-systems/x86_64-linux";
   };
 
-  outputs = inputs @ {
-    nixpkgs,
-    self,
-    homeManager,
-    supercollider,
-    flakeUtils,
-    ...
+  outputs = inputs @ { self
+  , nixpkgs
+  , homeManager
+  , supercollider
+  , flakeUtils
+  , ...
   }: rec {
     systems = {
       tuxedo = import systems/tuxedo;
@@ -292,8 +291,14 @@
       };
       users.nixos = import homeModules/users/nixos;
     };
-    overlays = {
-      ungoogled-chromium = import overlays/ungoogled-chromium;
+    overlays.ungoogled-chromium = import overlays/ungoogled-chromium;
+    nixvimModules.config = {
+      basic = import nixvimModules/config/basic;
+      extra = (import nixvimModules/config/extra) self;
+    };
+    nixvimConfigurations = system: rec {
+      basic = inputs.nixvim.legacyPackages.${ system }.makeNixvim nixvimModules.config.basic;
+      extra = basic.extend (nixvimModules.config.extra system);
     };
   } // flakeUtils.lib.eachDefaultSystem (system: {
     packages = let
