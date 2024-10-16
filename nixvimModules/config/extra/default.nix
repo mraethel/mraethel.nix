@@ -32,11 +32,5 @@ mraethel: system: {
 #         };
       };
     };
-
-    vimtex = {
-      enable = true;
-      texlivePackage = mraethel.packages.${ system }.texlive;
-      settings.view_method = "zathura";
-    };
   };
 }
