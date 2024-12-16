@@ -23,8 +23,11 @@ mraethel: system: {
 
     lsp = {
       servers = {
-        hls.enable = true;
-        kotlin-language-server.enable = true;
+        hls = {
+          enable = true;
+          installGhc = false;
+        };
+        kotlin_language_server.enable = true;
 #         rust-analyzer = {
 #           enable = true;
 #           installCargo = true;

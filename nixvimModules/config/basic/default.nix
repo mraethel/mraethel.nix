@@ -29,6 +29,7 @@
     luasnip.enable = true;
     nix.enable = true;
     treesitter-context.enable = true; 
+    web-devicons.enable = true;
 
     cmp = {
       enable = true;
