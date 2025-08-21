@@ -43,6 +43,14 @@ in {
   options.programs.ssh.hosts = lib.mkOption {
     type = lib.types.attrsOf (lib.types.submodule {
       options = {
+        AddressFamily = lib.mkOption {
+          type = lib.types.nullOr 
+                  (lib.types.enum
+                     [ "any"
+                       "inet"
+                       "inet6" ]);
+          default = null;
+        };
         HostName = lib.mkOption {
           type = lib.types.nullOr lib.types.str;
           default = null;
@@ -51,14 +59,14 @@ in {
           type = lib.types.nullOr lib.types.str;
           default = null;
         };
-        User = lib.mkOption {
-          type = lib.types.nullOr lib.types.str;
-          default = null;
-        };
         IdentitiesOnly = lib.mkOption {
           type = lib.types.nullOr lib.types.bool;
           default = null;
         };
+        User = lib.mkOption {
+          type = lib.types.nullOr lib.types.str;
+          default = null;
+        }; 
       };
     });
   };

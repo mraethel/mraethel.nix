@@ -11,6 +11,7 @@
         User = "user";
       };
       mraetheluks = {
+        AddressFamily = "inet";
         HostName = "mraethel.de";
         HostKeyAlias = "mraetheluks";
         User = "root";
