@@ -1,10 +1,14 @@
 {
-  system = "x86_64-linux";
-  stateVersion = "23.11";
-  timeZone = "Europe/Berlin";
+  emulatedSystems = [ "aarch64-linux" ];
   fileSystems = import ./fileSystems;
-  kernelModules = [ "kvm-amd" ];
   initrd = import ./initrd;
+  kernelModules = [
+    "kvm-amd"
+    "pkcs8_key_parser"
+  ];
   luksDevices = import ./luksDevices;
   networking = import ./networking;
+  stateVersion = "23.11";
+  system = "x86_64-linux";
+  timeZone = "Europe/Berlin";
 }

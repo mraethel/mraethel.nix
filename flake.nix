@@ -54,6 +54,7 @@
         };
         config = {
           alacritty = import nixosModules/config/alacritty;
+          emulatedSystems = import nixosModules/config/emulatedSystems;
           fileSystems = import nixosModules/config/fileSystems;
           glirc = import nixosModules/config/glirc;
           grub = import nixosModules/config/grub;
@@ -69,6 +70,7 @@
           nix = import nixosModules/config/nix;
           nix-serve = import nixosModules/config/nix-serve;
           nixvim = import nixosModules/config/nixvim;
+          ntfs = import nixosModules/config/ntfs;
           openssh = import nixosModules/config/openssh;
           pianoteq = import nixosModules/config/pianoteq;
           pipewire = import nixosModules/config/pipewire;
@@ -110,6 +112,7 @@
             ])
             ++ (with nixosModules.config; [
               alacritty
+              emulatedSystems
               fileSystems
               glirc
               home-manager
@@ -123,6 +126,7 @@
               nix
               nix-serve
               nixvim
+              ntfs
               openssh
               pianoteq
               pipewire
