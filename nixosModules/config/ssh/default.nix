@@ -1,9 +1,5 @@
 {
   programs.ssh = {
-    knownHosts = {
-      mraethel.publicKeyFile = knownHosts/mraethel;
-      mraetheluks.publicKeyFile = knownHosts/mraetheluks;
-    };
     hosts = {
       mraethel = {
         HostName = "mraethel.de";
@@ -17,6 +13,10 @@
         User = "root";
       };
       "*".IdentitiesOnly = true;
+    };
+    knownHosts = {
+      mraethel.publicKeyFile = knownHosts/mraethel;
+      mraetheluks.publicKeyFile = knownHosts/mraetheluks;
     };
   };
 }

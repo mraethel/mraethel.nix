@@ -76,8 +76,10 @@
     nvim-tree = {
       enable = true;
       openOnSetup = true;
-      actions.openFile.quitOnOpen = true;
-      view.side = "right";
+      settings = {
+        actions.open_file.quit_on_open = true;
+        view.side = "right";
+      };
     };
 
     telescope = {
