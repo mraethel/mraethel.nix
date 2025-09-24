@@ -61,6 +61,7 @@
           home-manager = import nixosModules/config/home-manager;
           iamb = import nixosModules/config/iamb;
           initrd = import nixosModules/config/initrd;
+          iwd = import nixosModules/config/iwd;
           kernelModules = import nixosModules/config/kernelModules;
           luksDevices = import nixosModules/config/luksDevices;
           mailserver = import nixosModules/config/mailserver;

@@ -1,11 +1,13 @@
 {
-  system = "x86_64-linux";
-  stateVersion = "24.05";
-  timeZone = "Europe/Berlin";
+  domain = "mraethel.de";
   fileSystems = import ./fileSystems;
+  hostName = "donet";
   initrd = import ./initrd;
   luksDevices = import ./luksDevices;
-  swapDevices = import ./swapDevices;
   mailserver = import ./mailserver;
-  networking = import ./networking;
+  networks = import ./networks;
+  stateVersion = "24.05";
+  swapDevices = import ./swapDevices;
+  system = "x86_64-linux";
+  timeZone = "Europe/Berlin";
 }

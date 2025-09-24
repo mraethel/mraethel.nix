@@ -1,10 +1,17 @@
 {
-  networking,
+  domain ? null,
+  hostName,
+  networks ? { },
   ...
 }:
 {
-  inherit networking;
-  networking.useDHCP = false;
+  networking = {
+    inherit domain hostName;
+    useDHCP = false;
+  };
   services.resolved.enable = true;
-  systemd.network.enable = true;
+  systemd.network = {
+    enable = true;
+    inherit networks;
+  };
 }

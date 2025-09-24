@@ -1,10 +1,10 @@
 {
-  system = "x86_64-linux";
-  stateVersion = "23.11";
-  timeZone = "Europe/Berlin";
   fileSystems = import ./fileSystems;
+  grubDevice = "/dev/sda";
+  hostName = "blackbox";
   initrd = import ./initrd;
   kernelModules = [ "kvm-amd" ];
-  grubDevice = "/dev/sda";
-  networking = import ./networking;
+  stateVersion = "23.11";
+  system = "x86_64-linux";
+  timeZone = "Europe/Berlin";
 }
