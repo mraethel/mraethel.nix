@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.programs.fossil;
-in {
+in
+{
   options.programs.fossil = {
     enable = lib.mkEnableOption "fossil";
     package = lib.mkPackageOption pkgs "fossil" { };

@@ -28,11 +28,11 @@ mraethel: system: {
           installGhc = false;
         };
         kotlin_language_server.enable = true;
-#         rust-analyzer = {
-#           enable = true;
-#           installCargo = true;
-#           installRustc = true;
-#         };
+        #         rust-analyzer = {
+        #           enable = true;
+        #           installCargo = true;
+        #           installRustc = true;
+        #         };
       };
     };
   };

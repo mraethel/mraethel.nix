@@ -1,4 +1,7 @@
 {
   stateVersion,
   ...
-}: { home.stateVersion = stateVersion; }
+}:
+{
+  home.stateVersion = stateVersion;
+}

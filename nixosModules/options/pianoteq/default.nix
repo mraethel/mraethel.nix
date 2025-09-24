@@ -4,12 +4,14 @@
   self,
   system,
   ...
-}: let
+}:
+let
   cfg = config.programs.pianoteq;
-in {
+in
+{
   options.programs.pianoteq = {
     enable = lib.mkEnableOption "pianoteq";
-    package = lib.mkPackageOption self.packages.${ system } "pianoteq" {
+    package = lib.mkPackageOption self.packages.${system} "pianoteq" {
       extraDescription = ''
         This option expects you to define packages.<system>.pianoteq in your flake!
         To use this flake's package you can define:

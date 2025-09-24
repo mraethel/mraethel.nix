@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.programs.chromium;
-in {
+in
+{
   options.programs.chromium.searx = {
     enable = lib.mkEnableOption "SearXNG";
     domain = lib.mkOption {
@@ -19,15 +21,15 @@ in {
 
   config.programs.chromium = lib.mkIf cfg.searx.enable {
     defaultSearchProviderEnabled = true;
-    defaultSearchProviderSearchURL = "${ cfg.searx.domain }/search"; # bug: Invalid search URL
-    defaultSearchProviderSuggestURL = "${ cfg.searx.domain }/autocompleter";
+    defaultSearchProviderSearchURL = "${cfg.searx.domain}/search"; # bug: Invalid search URL
+    defaultSearchProviderSuggestURL = "${cfg.searx.domain}/autocompleter";
     extraOpts = {
       DefaultSearchProviderSearchURLPostParams = "q={searchTerms}";
       DefaultSearchProviderSuggestURLPostParams = "q={searchTerms}";
       DefaultSearchProviderName = "SearXNG";
       NewTabPageLocation = cfg.searx.domain;
       RestoreOnStartup = 4;
-      RestoreOnStartupURLs = [ "${ cfg.searx.domain }/preferences?preferences=${ cfg.searx.hash }" ];
+      RestoreOnStartupURLs = [ "${cfg.searx.domain}/preferences?preferences=${cfg.searx.hash}" ];
     };
   };
 }

@@ -1,4 +1,7 @@
 {
   fileSystems,
   ...
-}: { inherit fileSystems; }
+}:
+{
+  inherit fileSystems;
+}

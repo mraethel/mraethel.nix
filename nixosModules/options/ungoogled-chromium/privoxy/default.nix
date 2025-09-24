@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.programs.chromium;
-in {
+in
+{
   options.programs.chromium = {
     usePrivoxy = lib.mkOption {
       type = lib.types.bool;
@@ -15,7 +17,7 @@ in {
   config.programs.chromium.extraOpts = lib.optionalAttrs cfg.usePrivoxy {
     ProxySettings = {
       ProxyMode = "fixed_servers";
-      ProxyServer = "http://${ config.services.privoxy.settings.listen-address }";
+      ProxyServer = "http://${config.services.privoxy.settings.listen-address}";
     };
     HttpAllowlist = lib.optionals (config.services.privoxy.enableTor) [ "[*.]onion" ];
   };

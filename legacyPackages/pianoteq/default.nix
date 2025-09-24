@@ -4,12 +4,13 @@
   freetype,
   p7zip,
   src,
-  stdenv
-}: stdenv.mkDerivation {
+  stdenv,
+}:
+stdenv.mkDerivation {
   pname = "pianoteq";
   version = "8.2.0";
   inherit src;
-  
+
   nativeBuildInputs = [
     p7zip
     autoPatchelfHook

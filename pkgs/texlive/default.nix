@@ -1,4 +1,5 @@
-{ pkgs }: pkgs.texlive.combine {
+{ pkgs }:
+pkgs.texlive.combine {
   inherit (pkgs.texlive)
     breqn
     catchfile
@@ -12,5 +13,6 @@
     trimspaces
     venndiagram
     xcolor
-    xkeyval;
+    xkeyval
+    ;
 }

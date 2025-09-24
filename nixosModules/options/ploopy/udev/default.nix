@@ -4,12 +4,14 @@
   mraethel,
   system,
   ...
-}: let
+}:
+let
   cfg = config.programs.ploopy;
-in {
+in
+{
   options.programs.ploopy.udev = {
     enable = lib.mkEnableOption "ploopy-udev";
-    package = lib.mkPackageOption mraethel.packages.${ system } "ploopy-udev" { };
+    package = lib.mkPackageOption mraethel.packages.${system} "ploopy-udev" { };
   };
 
   config.services.udev.packages = lib.mkIf (cfg.enable || cfg.udev.enable) [ cfg.udev.package ];

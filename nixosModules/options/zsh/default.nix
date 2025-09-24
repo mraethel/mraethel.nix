@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.programs.zsh;
-in {
+in
+{
   imports = [ ./p10k ];
 
   options.programs.zsh.completion.specialDirs = lib.mkOption {

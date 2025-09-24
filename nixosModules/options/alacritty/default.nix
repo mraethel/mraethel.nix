@@ -3,10 +3,12 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   cfg = config.programs.alacritty;
   toml = pkgs.formats.toml { };
-in {
+in
+{
   options.programs.alacritty = {
     enable = lib.mkEnableOption "alacritty";
     package = lib.mkPackageOption pkgs "alacritty" { };
@@ -15,7 +17,7 @@ in {
       default = { };
     };
   };
-  
+
   config.environment = lib.mkIf cfg.enable {
     systemPackages = [ cfg.package ];
     etc.alacritty = {

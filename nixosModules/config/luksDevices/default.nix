@@ -1,4 +1,7 @@
 {
   luksDevices,
   ...
-}: { boot.initrd.luks.devices = luksDevices; }
+}:
+{
+  boot.initrd.luks.devices = luksDevices;
+}

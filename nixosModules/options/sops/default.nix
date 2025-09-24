@@ -3,9 +3,11 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   cfg = config.programs.sops;
-in {
+in
+{
   options.programs.sops = {
     enable = lib.mkEnableOption "sops";
     package = lib.mkPackageOption pkgs "sops" { };

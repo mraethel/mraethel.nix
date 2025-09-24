@@ -2,4 +2,7 @@
   config,
   mailserver,
   ...
-}: { mailserver = mailserver { inherit config; }; }
+}:
+{
+  mailserver = mailserver { inherit config; };
+}

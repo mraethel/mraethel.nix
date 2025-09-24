@@ -1,7 +1,8 @@
 {
   config,
   ...
-}: {
+}:
+{
   enable = true;
   fqdn = "mail.mraethel.de";
   domains = [ "mraethel.de" ];

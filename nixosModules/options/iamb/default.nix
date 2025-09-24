@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.programs.iamb;
-in {
+in
+{
   options.programs.iamb = {
     enable = lib.mkEnableOption "iamb";
     package = lib.mkPackageOption pkgs "iamb" { };

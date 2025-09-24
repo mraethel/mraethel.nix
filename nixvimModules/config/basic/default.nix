@@ -21,14 +21,14 @@
     shiftwidth = 0;
     tabstop = 2;
     signcolumn = "yes";
-  }; 
+  };
 
   plugins = {
     diffview.enable = true;
     lualine.enable = true;
     luasnip.enable = true;
     nix.enable = true;
-    treesitter-context.enable = true; 
+    treesitter-context.enable = true;
     web-devicons.enable = true;
 
     cmp = {
@@ -99,7 +99,7 @@
       folding = true;
       settings.highlight.enable = true;
     };
-  }; 
+  };
 
   viAlias = true;
   vimAlias = true;

@@ -1,9 +1,10 @@
 {
   supercollider,
   startupFile,
-  writeShellApplication
-}: writeShellApplication {
+  writeShellApplication,
+}:
+writeShellApplication {
   name = "sclang-with-mraethel";
   runtimeInputs = [ supercollider ];
-  text = "sclang ${ startupFile }";
+  text = "sclang ${startupFile}";
 }

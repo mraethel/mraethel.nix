@@ -1,4 +1,7 @@
 {
   timeZone,
   ...
-}: { time.timeZone = timeZone; }
+}:
+{
+  time.timeZone = timeZone;
+}

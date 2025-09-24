@@ -2,13 +2,15 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.nix;
-in {
+in
+{
   options.nix.includes = lib.mkOption {
     type = lib.types.listOf lib.types.path;
     default = [ ];
   };
 
-  config.nix.extraOptions = lib.concatMapStringsSep "\n" (file: "!include ${ file }") cfg.includes;
+  config.nix.extraOptions = lib.concatMapStringsSep "\n" (file: "!include ${file}") cfg.includes;
 }
