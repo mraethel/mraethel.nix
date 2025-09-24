@@ -2,7 +2,6 @@
   config,
   lib,
   mraethel,
-  system,
   ...
 }:
 let
@@ -11,7 +10,7 @@ in
 {
   options.programs.glirc = {
     enable = lib.mkEnableOption "glirc";
-    package = lib.mkPackageOption mraethel.legacyPackages.${system} "glirc" { };
+    package = lib.mkPackageOption mraethel.legacyPackages.${config.nixpkgs.system} "glirc" { };
   };
 
   config.environment.systemPackages = lib.mkIf cfg.enable [ cfg.package ];

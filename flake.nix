@@ -31,12 +31,6 @@
       ...
     }:
     rec {
-      systems = {
-        tuxedo = import systems/tuxedo;
-        blackbox = import systems/blackbox;
-        epc = import systems/epc;
-        donet = import systems/donet;
-      };
       nixosModules = {
         options = {
           alacritty = import nixosModules/options/alacritty;
@@ -54,17 +48,11 @@
         };
         config = {
           alacritty = import nixosModules/config/alacritty;
-          emulatedSystems = import nixosModules/config/emulatedSystems;
-          fileSystems = import nixosModules/config/fileSystems;
           glirc = import nixosModules/config/glirc;
           grub = import nixosModules/config/grub;
           home-manager = import nixosModules/config/home-manager;
           iamb = import nixosModules/config/iamb;
-          initrd = import nixosModules/config/initrd;
           iwd = import nixosModules/config/iwd;
-          kernelModules = import nixosModules/config/kernelModules;
-          luksDevices = import nixosModules/config/luksDevices;
-          mailserver = import nixosModules/config/mailserver;
           musnix = import nixosModules/config/musnix;
           networking = import nixosModules/config/networking;
           nitrokey = import nixosModules/config/nitrokey;
@@ -80,14 +68,17 @@
           qemuGuest = import nixosModules/config/qemuGuest;
           sops = import nixosModules/config/sops;
           ssh = import nixosModules/config/ssh;
-          stateVersion = import nixosModules/config/stateVersion;
           sudo = import nixosModules/config/sudo;
-          swapDevices = import nixosModules/config/swapDevices;
           systemd-boot = import nixosModules/config/systemd-boot;
-          timeZone = import nixosModules/config/timeZone;
           tor = import nixosModules/config/tor;
           ungoogled-chromium = import nixosModules/config/ungoogled-chromium;
           zsh = import nixosModules/config/zsh;
+        };
+        systems = {
+          tuxedo = import nixosModules/systems/tuxedo;
+          blackbox = import nixosModules/systems/blackbox;
+          epc = import nixosModules/systems/epc;
+          donet = import nixosModules/systems/donet;
         };
         users = {
           nixos = import nixosModules/users/nixos;
@@ -96,225 +87,210 @@
       };
       nixosConfigurations = {
         tuxedo = nixpkgs.lib.nixosSystem {
-          inherit (systems.tuxedo) system;
-          specialArgs = inputs // systems.tuxedo;
-          modules =
-            (with nixosModules.options; [
-              alacritty
-              glirc
-              iamb
-              nix
-              pianoteq
-              ploopy
-              sops
-              ssh
-              ungoogled-chromium
-              zsh
-            ])
-            ++ (with nixosModules.config; [
-              alacritty
-              emulatedSystems
-              fileSystems
-              glirc
-              home-manager
-              iamb
-              initrd
-              kernelModules
-              luksDevices
-              musnix
-              networking
-              nitrokey
-              nix
-              nix-serve
-              nixvim
-              ntfs
-              openssh
-              pianoteq
-              pipewire
-              ploopy
-              privoxy
-              sops
-              ssh
-              stateVersion
-              sudo
-              systemd-boot
-              timeZone
-              tor
-              ungoogled-chromium
-              zsh
-            ])
-            ++ (with nixosModules.users; [
-              nixos
-              root
-            ])
-            ++ (with nixpkgs.nixosModules; [
-              notDetected
-            ])
-            ++ (with inputs.musnix.nixosModules; [
-              musnix
-            ])
-            ++ (with inputs.sops.nixosModules; [
-              sops
-            ])
-            ++ (with inputs.nixServeNG.nixosModules; [
-              default
-            ])
-            ++ (with homeManager.nixosModules; [
-              home-manager
-            ])
-            ++ (with inputs.nixvim.nixosModules; [
-              nixvim
-            ]);
+          system = "x86_64-linux";
+          specialArgs = inputs;
+          modules = [
+            nixosModules.systems.tuxedo
+          ]
+          ++ (with nixosModules.options; [
+            alacritty
+            glirc
+            iamb
+            nix
+            pianoteq
+            ploopy
+            sops
+            ssh
+            ungoogled-chromium
+            zsh
+          ])
+          ++ (with nixosModules.config; [
+            alacritty
+            glirc
+            home-manager
+            iamb
+            iwd
+            musnix
+            networking
+            nitrokey
+            nix
+            nix-serve
+            nixvim
+            ntfs
+            openssh
+            pianoteq
+            pipewire
+            ploopy
+            privoxy
+            sops
+            ssh
+            sudo
+            systemd-boot
+            tor
+            ungoogled-chromium
+            zsh
+          ])
+          ++ (with nixosModules.users; [
+            nixos
+            root
+          ])
+          ++ (with nixpkgs.nixosModules; [
+            notDetected
+          ])
+          ++ (with inputs.musnix.nixosModules; [
+            musnix
+          ])
+          ++ (with inputs.sops.nixosModules; [
+            sops
+          ])
+          ++ (with inputs.nixServeNG.nixosModules; [
+            default
+          ])
+          ++ (with homeManager.nixosModules; [
+            home-manager
+          ])
+          ++ (with inputs.nixvim.nixosModules; [
+            nixvim
+          ]);
         };
         blackbox = nixpkgs.lib.nixosSystem {
-          inherit (systems.blackbox) system;
-          specialArgs = inputs // systems.blackbox;
-          modules =
-            (with nixosModules.options; [
-              alacritty
-              glirc
-              iamb
-              nix
-              sops
-              ungoogled-chromium
-              zsh
-            ])
-            ++ (with nixosModules.config; [
-              alacritty
-              fileSystems
-              glirc
-              grub
-              home-manager
-              iamb
-              initrd
-              kernelModules
-              networking
-              nitrokey
-              nix
-              nixvim
-              openssh
-              pipewire
-              privoxy
-              sops
-              stateVersion
-              sudo
-              timeZone
-              tor
-              ungoogled-chromium
-              zsh
-            ])
-            ++ (with nixosModules.users; [
-              root
-              nixos
-            ])
-            ++ (with nixpkgs.nixosModules; [
-              notDetected
-            ])
-            ++ (with inputs.sops.nixosModules; [
-              sops
-            ])
-            ++ (with homeManager.nixosModules; [
-              home-manager
-            ])
-            ++ (with inputs.nixvim.nixosModules; [
-              nixvim
-            ]);
+          system = "x86_64-linux";
+          specialArgs = inputs;
+          modules = [
+            nixosModules.systems.blackbox
+          ]
+          ++ (with nixosModules.options; [
+            alacritty
+            glirc
+            iamb
+            nix
+            sops
+            ungoogled-chromium
+            zsh
+          ])
+          ++ (with nixosModules.config; [
+            alacritty
+            glirc
+            grub
+            home-manager
+            iamb
+            networking
+            nitrokey
+            nix
+            nixvim
+            openssh
+            pipewire
+            privoxy
+            sops
+            sudo
+            tor
+            ungoogled-chromium
+            zsh
+          ])
+          ++ (with nixosModules.users; [
+            root
+            nixos
+          ])
+          ++ (with nixpkgs.nixosModules; [
+            notDetected
+          ])
+          ++ (with inputs.sops.nixosModules; [
+            sops
+          ])
+          ++ (with homeManager.nixosModules; [
+            home-manager
+          ])
+          ++ (with inputs.nixvim.nixosModules; [
+            nixvim
+          ]);
         };
         epc = nixpkgs.lib.nixosSystem {
-          inherit (systems.epc) system;
-          specialArgs = inputs // systems.epc;
-          modules =
-            (with nixosModules.options; [
-              alacritty
-              nix
-              sops
-              ungoogled-chromium
-              zsh
-            ])
-            ++ (with nixosModules.config; [
-              alacritty
-              fileSystems
-              home-manager
-              initrd
-              networking
-              nitrokey
-              nix
-              nixvim
-              openssh
-              pipewire
-              privoxy
-              sops
-              stateVersion
-              sudo
-              swapDevices
-              timeZone
-              tor
-              ungoogled-chromium
-              zsh
-            ])
-            ++ (with nixosModules.users; [
-              nixos
-              root
-            ])
-            ++ (with nixpkgs.nixosModules; [
-              notDetected
-            ])
-            ++ (with inputs.sops.nixosModules; [
-              sops
-            ])
-            ++ (with homeManager.nixosModules; [
-              home-manager
-            ])
-            ++ (with inputs.nixvim.nixosModules; [
-              nixvim
-            ]);
+          system = "x86_64-linux";
+          specialArgs = inputs;
+          modules = [
+            nixosModules.systems.epc
+          ]
+          ++ (with nixosModules.options; [
+            alacritty
+            nix
+            sops
+            ungoogled-chromium
+            zsh
+          ])
+          ++ (with nixosModules.config; [
+            alacritty
+            home-manager
+            networking
+            nitrokey
+            nix
+            nixvim
+            openssh
+            pipewire
+            privoxy
+            sops
+            sudo
+            tor
+            ungoogled-chromium
+            zsh
+          ])
+          ++ (with nixosModules.users; [
+            nixos
+            root
+          ])
+          ++ (with nixpkgs.nixosModules; [
+            notDetected
+          ])
+          ++ (with inputs.sops.nixosModules; [
+            sops
+          ])
+          ++ (with homeManager.nixosModules; [
+            home-manager
+          ])
+          ++ (with inputs.nixvim.nixosModules; [
+            nixvim
+          ]);
         };
         donet = nixpkgs.lib.nixosSystem {
-          inherit (systems.donet) system;
-          specialArgs = inputs // systems.donet;
-          modules =
-            (with nixosModules.options; [
-              alacritty # depOf nixosModules.config.zsh
-              conduit
-              nix
-              sops
-              zsh
-            ])
-            ++ (with nixosModules.config; [
-              fileSystems
-              home-manager
-              initrd
-              luksDevices
-              mailserver
-              networking
-              nix
-              nixvim
-              openssh
-              qemuGuest
-              sops
-              stateVersion
-              sudo
-              swapDevices
-              systemd-boot
-              timeZone
-              zsh
-            ])
-            ++ (with nixosModules.users; [
-              nixos
-              root
-            ])
-            ++ (with inputs.sops.nixosModules; [
-              sops
-            ])
-            ++ (with homeManager.nixosModules; [
-              home-manager
-            ])
-            ++ (with inputs.nixvim.nixosModules; [
-              nixvim
-            ])
-            ++ (with inputs.simple-nixos-mailserver.nixosModules; [
-              mailserver
-            ]);
+          system = "x86_64-linux";
+          specialArgs = inputs;
+          modules = [
+            nixosModules.systems.donet
+          ]
+          ++ (with nixosModules.options; [
+            alacritty # depOf nixosModules.config.zsh
+            conduit
+            nix
+            sops
+            zsh
+          ])
+          ++ (with nixosModules.config; [
+            home-manager
+            networking
+            nix
+            nixvim
+            openssh
+            qemuGuest
+            sops
+            sudo
+            systemd-boot
+            zsh
+          ])
+          ++ (with nixosModules.users; [
+            nixos
+            root
+          ])
+          ++ (with inputs.sops.nixosModules; [
+            sops
+          ])
+          ++ (with homeManager.nixosModules; [
+            home-manager
+          ])
+          ++ (with inputs.nixvim.nixosModules; [
+            nixvim
+          ])
+          ++ (with inputs.simple-nixos-mailserver.nixosModules; [
+            mailserver
+          ]);
         };
       };
       homeModules = {

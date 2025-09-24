@@ -1,6 +1,6 @@
 {
+  config,
   mraethel,
-  system,
   ...
 }:
 {
@@ -9,5 +9,5 @@
   #   defaultEditor = true;
   #   package = (mraethel.nixvimConfigurations system).extra;
   # };
-  environment.systemPackages = [ (mraethel.nixvimConfigurations system).extra ];
+  environment.systemPackages = [ (mraethel.nixvimConfigurations config.nixpkgs.system).extra ];
 }

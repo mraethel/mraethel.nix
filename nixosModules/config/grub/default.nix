@@ -1,13 +1,6 @@
 {
-  grubDevice,
-  ...
-}:
-{
   boot.loader = {
-    grub = {
-      enable = true;
-      device = grubDevice;
-    };
+    grub.enable = true;
     timeout = 0;
   };
 }

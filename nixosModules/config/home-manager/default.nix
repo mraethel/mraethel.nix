@@ -1,12 +1,12 @@
 {
-  stateVersion,
+  config,
   mraethel,
   ...
 }:
 {
   home-manager = {
     useUserPackages = true;
-    extraSpecialArgs = { inherit stateVersion; };
+    extraSpecialArgs = { inherit (config.system) stateVersion; };
     sharedModules = (
       with mraethel.homeModules.config;
       [

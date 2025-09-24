@@ -2,7 +2,6 @@
   config,
   lib,
   mraethel,
-  system,
   ...
 }:
 let
@@ -34,7 +33,7 @@ in
   ];
 
   options.programs.chromium = {
-    package = lib.mkPackageOption mraethel.packages.${system} "ungoogled-chromium" { };
+    package = lib.mkPackageOption mraethel.packages.${config.nixpkgs.system} "ungoogled-chromium" { };
     ManagedBookmarks = lib.mkOption {
       type = mbType;
       default = [ ];
