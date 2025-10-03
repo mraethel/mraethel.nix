@@ -1,5 +1,7 @@
 {
   inputs = {
+    arcan.url = "github:mraethel/arcan.nix";
+
     homeManager.url = "github:nix-community/home-manager";
 
     musnix.url = "github:musnix/musnix";
@@ -48,6 +50,7 @@
         };
         config = {
           alacritty = import nixosModules/config/alacritty;
+          arcan = import nixosModules/config/arcan;
           glirc = import nixosModules/config/glirc;
           grub = import nixosModules/config/grub;
           home-manager = import nixosModules/config/home-manager;
@@ -106,6 +109,7 @@
           ])
           ++ (with nixosModules.config; [
             alacritty
+            arcan
             glirc
             home-manager
             iamb
@@ -134,24 +138,16 @@
             nixos
             root
           ])
-          ++ (with nixpkgs.nixosModules; [
-            notDetected
+          ++ (with inputs.arcan.nixosModules; [
+            options.default
+            config.default
           ])
-          ++ (with inputs.musnix.nixosModules; [
-            musnix
-          ])
-          ++ (with inputs.sops.nixosModules; [
-            sops
-          ])
-          ++ (with inputs.nixServeNG.nixosModules; [
-            default
-          ])
-          ++ (with homeManager.nixosModules; [
-            home-manager
-          ])
-          ++ (with inputs.nixvim.nixosModules; [
-            nixvim
-          ]);
+          ++ [ nixpkgs.nixosModules.notDetected ]
+          ++ [ inputs.musnix.nixosModules.musnix ]
+          ++ [ inputs.sops.nixosModules.sops ]
+          ++ [ inputs.nixServeNG.nixosModules.default ]
+          ++ [ homeManager.nixosModules.home-manager ]
+          ++ [ inputs.nixvim.nixosModules.nixvim ];
         };
         blackbox = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -191,18 +187,10 @@
             root
             nixos
           ])
-          ++ (with nixpkgs.nixosModules; [
-            notDetected
-          ])
-          ++ (with inputs.sops.nixosModules; [
-            sops
-          ])
-          ++ (with homeManager.nixosModules; [
-            home-manager
-          ])
-          ++ (with inputs.nixvim.nixosModules; [
-            nixvim
-          ]);
+          ++ [ nixpkgs.nixosModules.notDetected ]
+          ++ [ inputs.sops.nixosModules.sops ]
+          ++ [ homeManager.nixosModules.home-manager ]
+          ++ [ inputs.nixvim.nixosModules.nixvim ];
         };
         epc = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -237,18 +225,10 @@
             nixos
             root
           ])
-          ++ (with nixpkgs.nixosModules; [
-            notDetected
-          ])
-          ++ (with inputs.sops.nixosModules; [
-            sops
-          ])
-          ++ (with homeManager.nixosModules; [
-            home-manager
-          ])
-          ++ (with inputs.nixvim.nixosModules; [
-            nixvim
-          ]);
+          ++ [ nixpkgs.nixosModules.notDetected ]
+          ++ [ inputs.sops.nixosModules.sops ]
+          ++ [ homeManager.nixosModules.home-manager ]
+          ++ [ inputs.nixvim.nixosModules.nixvim ];
         };
         donet = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -279,18 +259,10 @@
             nixos
             root
           ])
-          ++ (with inputs.sops.nixosModules; [
-            sops
-          ])
-          ++ (with homeManager.nixosModules; [
-            home-manager
-          ])
-          ++ (with inputs.nixvim.nixosModules; [
-            nixvim
-          ])
-          ++ (with inputs.simple-nixos-mailserver.nixosModules; [
-            mailserver
-          ]);
+          ++ [ inputs.sops.nixosModules.sops ]
+          ++ [ homeManager.nixosModules.home-manager ]
+          ++ [ inputs.nixvim.nixosModules.nixvim ]
+          ++ [ inputs.simple-nixos-mailserver.nixosModules.mailserver ];
         };
       };
       homeModules = {
