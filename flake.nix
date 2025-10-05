@@ -75,6 +75,7 @@
           systemd-boot = import nixosModules/config/systemd-boot;
           tor = import nixosModules/config/tor;
           ungoogled-chromium = import nixosModules/config/ungoogled-chromium;
+          users = import nixosModules/config/users;
           zsh = import nixosModules/config/zsh;
         };
         systems = {
@@ -130,6 +131,7 @@
             systemd-boot
             tor
             ungoogled-chromium
+            users
             zsh
           ])
           ++ (with nixosModules.users; [
@@ -178,6 +180,7 @@
             sudo
             tor
             ungoogled-chromium
+            users
             zsh
           ])
           ++ (with nixosModules.users; [

@@ -12,7 +12,7 @@ in
     enable = lib.mkEnableOption "powerlevel10k";
     configFile = lib.mkOption {
       type = lib.types.path;
-      default = ./p10k.zsh;
+      default = "${./p10k.zsh}";
     };
   };
 

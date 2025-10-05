@@ -26,6 +26,6 @@
     ];
     kernelModules = [ "kvm-amd" ];
   };
-  stateVersion = "23.11";
+  system.stateVersion = "23.11";
   time.timeZone = "Europe/Berlin";
 }
