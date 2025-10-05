@@ -96,7 +96,6 @@
             nixosModules.systems.tuxedo
           ]
           ++ (with nixosModules.options; [
-            alacritty
             glirc
             iamb
             nix
@@ -108,7 +107,6 @@
             zsh
           ])
           ++ (with nixosModules.config; [
-            alacritty
             arcan
             glirc
             home-manager
@@ -156,7 +154,6 @@
             nixosModules.systems.blackbox
           ]
           ++ (with nixosModules.options; [
-            alacritty
             glirc
             iamb
             nix
@@ -165,7 +162,7 @@
             zsh
           ])
           ++ (with nixosModules.config; [
-            alacritty
+            arcan
             glirc
             grub
             home-manager
@@ -186,6 +183,10 @@
           ++ (with nixosModules.users; [
             root
             nixos
+          ])
+          ++ (with inputs.arcan.nixosModules; [
+            options.default
+            config.default
           ])
           ++ [ nixpkgs.nixosModules.notDetected ]
           ++ [ inputs.sops.nixosModules.sops ]

@@ -19,10 +19,11 @@ in
   };
 
   config.environment = lib.mkIf cfg.enable {
-    systemPackages = [ cfg.package ];
     etc.alacritty = {
       source = toml.generate "alacritty.toml" cfg.settings;
       target = "alacritty/alacritty.toml";
     };
+    programs.alacritty.settings.font.normal.family = lib.mkIf config.programs.zsh.p10k.enable "MesloLGS NF";
+    systemPackages = [ cfg.package ];
   };
 }
