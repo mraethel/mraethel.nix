@@ -1,6 +1,6 @@
 {
-  boot.loader = {
-    grub.enable = true;
-    timeout = 0;
+  boot.loader.grub = {
+    enable = true;
+    timeoutStyle = "hidden";
   };
 }
