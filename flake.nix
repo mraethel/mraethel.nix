@@ -203,14 +203,14 @@
             nixosModules.systems.epc
           ]
           ++ (with nixosModules.options; [
-            alacritty
             nix
             sops
             ungoogled-chromium
             zsh
           ])
           ++ (with nixosModules.config; [
-            alacritty
+            arcan
+            grub
             home-manager
             networking
             nitrokey
@@ -229,6 +229,10 @@
             nixos
             root
           ])
+          ++ (with inputs.arcan.nixosModules; [
+            options.default
+            config.default
+          ])
           ++ [ nixpkgs.nixosModules.notDetected ]
           ++ [ inputs.sops.nixosModules.sops ]
           ++ [ homeManager.nixosModules.home-manager ]
@@ -241,7 +245,6 @@
             nixosModules.systems.donet
           ]
           ++ (with nixosModules.options; [
-            alacritty # depOf nixosModules.config.zsh
             conduit
             nix
             sops
