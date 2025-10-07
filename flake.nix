@@ -212,6 +212,7 @@
             arcan
             grub
             home-manager
+            iwd
             networking
             nitrokey
             nix

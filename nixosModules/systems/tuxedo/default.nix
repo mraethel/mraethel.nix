@@ -35,7 +35,7 @@
       ];
     };
   };
-  networking.hostName = "tuxedo"; 
+  networking.hostName = "tuxedo";
   system.stateVersion = "23.11";
   time.timeZone = "Europe/Berlin";
 }
