@@ -8,11 +8,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1759655639,
-        "narHash": "sha256-/otcyyGOZ9U0n4McKcKwfhtfMzC9EDFEGDWcV4WN2Rg=",
+        "lastModified": 1760104995,
+        "narHash": "sha256-h8GORMJEGHiy4W2KcxzR3t/bdA5i2uvGjFzKLwqd7wo=",
         "owner": "mraethel",
         "repo": "arcan.nix",
-        "rev": "f9900845cb5512c525265a933e4b1b1d04ce5b27",
+        "rev": "cd813ef0bbd4d2af9a8c7b5e1996c108598b72f0",
         "type": "github"
       },
       "original": {
