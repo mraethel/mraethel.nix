@@ -26,6 +26,13 @@
     };
   };
   networking.hostName = "blackbox";
+  programs.arcan.durden.autorun.extra = ''
+    display_add_listener(function(action,name,tiler,id)
+      if (action == "added" and name == "L15CM/CHGM02304027") then
+        dispatch_symbol("/global/display/displays/disp_" .. string.hexenc(name) .. "/focus");
+      end
+    end);
+  '';
   system.stateVersion = "23.11";
   time.timeZone = "Europe/Berlin";
 }
