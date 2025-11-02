@@ -169,6 +169,7 @@
             grub
             home-manager
             iamb
+            musnix
             networking
             nitrokey
             nix
@@ -192,6 +193,7 @@
             config.default
           ])
           ++ [ nixpkgs.nixosModules.notDetected ]
+          ++ [ inputs.musnix.nixosModules.musnix ]
           ++ [ inputs.sops.nixosModules.sops ]
           ++ [ homeManager.nixosModules.home-manager ]
           ++ [ inputs.nixvim.nixosModules.nixvim ];
