@@ -37,5 +37,9 @@
   };
   networking.hostName = "tuxedo";
   system.stateVersion = "23.11";
+  systemd.network.networks.wlan0 = {
+    name = "wlan0";
+    DHCP = "yes";
+  };
   time.timeZone = "Europe/Berlin";
 }

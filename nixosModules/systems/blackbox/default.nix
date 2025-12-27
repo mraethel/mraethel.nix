@@ -34,5 +34,9 @@
     end);
   '';
   system.stateVersion = "23.11";
+  systemd.network.networks.enp3s0 = {
+    name = "enp3s0";
+    DHCP = "yes";
+  };
   time.timeZone = "Europe/Berlin";
 }
