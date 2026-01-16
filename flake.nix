@@ -8,8 +8,6 @@
 
     nixvim.url = "github:nix-community/nixvim";
 
-    nixServeNG.url = "github:aristanetworks/nix-serve-ng";
-
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     sops.url = "github:Mic92/sops-nix";
@@ -145,7 +143,6 @@
           ++ [ nixpkgs.nixosModules.notDetected ]
           ++ [ inputs.musnix.nixosModules.musnix ]
           ++ [ inputs.sops.nixosModules.sops ]
-          ++ [ inputs.nixServeNG.nixosModules.default ]
           ++ [ homeManager.nixosModules.home-manager ]
           ++ [ inputs.nixvim.nixosModules.nixvim ];
         };

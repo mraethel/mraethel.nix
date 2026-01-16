@@ -1,10 +1,12 @@
 {
   config,
+  pkgs,
   ...
 }:
 {
   services.nix-serve = {
     enable = true;
+    package = pkgs.nix-serve-ng;
     secretKeyFile = config.sops.secrets.nix-serve.path;
   };
 }

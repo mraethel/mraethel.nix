@@ -3,7 +3,7 @@
   ...
 }:
 {
-  home-manager.users.nixos.programs.git.extraConfig.credential.helper = "store --file ${
+  home-manager.users.nixos.programs.git.settings.credential.helper = "store --file ${
     config.sops.secrets."nixos/pat".path
   }";
 }
