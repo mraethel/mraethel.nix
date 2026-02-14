@@ -24,4 +24,8 @@
     };
     certificateScheme = "acme-nginx";
   };
+  sops.secrets = {
+    "mailserver/mail@mraethel.de".sopsFile = ../secrets.yaml;
+    "mailserver/vault@mraethel.de".sopsFile = ../secrets.yaml;
+  };
 }

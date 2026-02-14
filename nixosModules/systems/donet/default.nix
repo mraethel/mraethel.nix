@@ -37,7 +37,7 @@
       ssh = {
         enable = true;
         shell = "/bin/cryptsetup-askpass";
-        authorizedKeyFiles = [ ./authorized_keys ];
+        authorizedKeyFiles = [ ./ssh_initrd_ed25519_key.pub ];
         hostKeys = [ "/etc/ssh/ssh_initrd_ed25519_key" ];
       };
     };
