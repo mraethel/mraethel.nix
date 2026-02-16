@@ -38,6 +38,7 @@
           modules =
             (with nixosModules; [
               systems.tuxedo
+              users.builder
               users.nixos
               users.root
             ])
