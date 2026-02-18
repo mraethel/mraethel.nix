@@ -1,4 +1,4 @@
-mraethel: system: {
+{
   plugins = {
     neogit.enable = true;
     gitmessenger.enable = true;
@@ -23,10 +23,6 @@ mraethel: system: {
 
     lsp = {
       servers = {
-        hls = {
-          enable = true;
-          installGhc = false;
-        };
         kotlin_language_server.enable = true;
         #         rust-analyzer = {
         #           enable = true;

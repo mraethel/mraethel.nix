@@ -308,13 +308,13 @@
           root = import nixosModules/users/root;
         };
       };
-      nixvimConfigurations = system: rec {
-        basic = inputs.nixvim.legacyPackages.${system}.makeNixvim nixvimModules.config.basic;
-        extra = basic.extend (nixvimModules.config.extra system);
+      nixvimConfigurations = rec {
+        basic = system: inputs.nixvim.legacyPackages.${system}.makeNixvim nixvimModules.config.basic;
+        extra = system: (basic system).extend nixvimModules.config.extra;
       };
       nixvimModules.config = {
         basic = import nixvimModules/config/basic;
-        extra = (import nixvimModules/config/extra) self;
+        extra = import nixvimModules/config/extra;
       };
       overlays.ungoogled-chromium = import overlays/ungoogled-chromium;
     }
