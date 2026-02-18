@@ -223,6 +223,7 @@
           modules =
             (with nixosModules; [
               config.cloneConfig
+              config.iwd
               config.networking
               config.nix
               config.openssh
