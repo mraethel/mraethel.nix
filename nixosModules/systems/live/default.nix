@@ -16,6 +16,10 @@
     "x86_64-linux" = default // {
       nixpkgs.hostPlatform = "x86_64-linux";
     };
+    netboot = {
+      imports = [ "${nixpkgs}/nixos/modules/installer/netboot/netboot-minimal.nix" ];
+      installer.cloneConfig = false;
+    };
   };
   networking.networkmanager.enable = lib.mkForce false;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
