@@ -114,6 +114,7 @@
               nixvim
               openssh
               pipewire
+              pixiecore
               privoxy
               sops
               sudo
@@ -269,6 +270,7 @@
           openssh = import nixosModules/config/openssh;
           pianoteq = import nixosModules/config/pianoteq;
           pipewire = import nixosModules/config/pipewire;
+          pixiecore = import nixosModules/config/pixiecore;
           ploopy = import nixosModules/config/ploopy;
           privoxy = import nixosModules/config/privoxy;
           qemuGuest = import nixosModules/config/qemuGuest;
