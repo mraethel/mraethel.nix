@@ -33,191 +33,112 @@
         options.fossil = import homeModules/options/fossil;
         users.nixos = import homeModules/users/nixos;
       };
-      nixosConfigurations = {
-        tuxedo = nixpkgs.lib.nixosSystem {
+      nixosConfigurations = rec {
+        default = nixpkgs.lib.nixosSystem {
           modules =
             (with nixosModules; [
+              config.arcan
+              config.builder
+              config.harmonia
+              config.home-manager
+              config.networking
+              config.nitrokey
+              config.nix
+              config.nixvim
+              config.openssh
+              config.pipewire
+              config.sops
+              config.sudo
+              config.zsh
+
+              options.nix
+              options.sops
+              options.zsh
+
+              users.nixos
+              users.root
+            ])
+            ++ (with inputs; [
+              arcan.nixosModules.config.default
+              arcan.nixosModules.options.default
+              homeManager.nixosModules.home-manager
+              nixpkgs.nixosModules.notDetected
+              nixvim.nixosModules.nixvim
+              sops.nixosModules.sops
+            ]);
+          specialArgs = inputs;
+          system = "x86_64-linux";
+        };
+        tuxedo = default.extendModules {
+          modules =
+            (with nixosModules; [
+              config.iwd
+              config.musnix
+              config.ntfs
+              config.pianoteq
+              config.ploopy
+              config.privoxy
+              config.ssh
+              config.systemd-boot
+              config.ungoogled-chromium
+              config.users
+
+              options.pianoteq
+              options.ploopy
+              options.ungoogled-chromium
+
               systems.tuxedo
+
               users.builder
               users.nixos
               users.root
             ])
-            ++ (with nixosModules.config; [
-              arcan
-              builder
-              glirc
-              harmonia
-              home-manager
-              iamb
-              iwd
-              musnix
-              networking
-              nitrokey
-              nix
-              nixvim
-              ntfs
-              openssh
-              pianoteq
-              pipewire
-              ploopy
-              privoxy
-              sops
-              ssh
-              sudo
-              systemd-boot
-              tor
-              ungoogled-chromium
-              users
-              zsh
-            ])
-            ++ (with nixosModules.options; [
-              glirc
-              iamb
-              nix
-              pianoteq
-              ploopy
-              sops
-              ungoogled-chromium
-              zsh
-            ])
             ++ (with inputs; [
-              arcan.nixosModules.config.default
-              arcan.nixosModules.options.default
-              homeManager.nixosModules.home-manager
               musnix.nixosModules.musnix
-              nixpkgs.nixosModules.notDetected
-              nixvim.nixosModules.nixvim
-              sops.nixosModules.sops
             ]);
-          specialArgs = inputs;
-          system = "x86_64-linux";
         };
-        blackbox = nixpkgs.lib.nixosSystem {
+        blackbox = default.extendModules {
           modules =
             (with nixosModules; [
+              config.grub
+              config.musnix
+              config.pixiecore
+              config.privoxy
+              config.ungoogled-chromium
+              config.users
+
+              options.ungoogled-chromium
+
               systems.blackbox
-              users.nixos
-              users.root
-            ])
-            ++ (with nixosModules.config; [
-              arcan
-              builder
-              glirc
-              grub
-              home-manager
-              iamb
-              musnix
-              networking
-              nitrokey
-              nix
-              nixvim
-              openssh
-              pipewire
-              pixiecore
-              privoxy
-              sops
-              sudo
-              tor
-              ungoogled-chromium
-              users
-              zsh
-            ])
-            ++ (with nixosModules.options; [
-              glirc
-              iamb
-              nix
-              sops
-              ungoogled-chromium
-              zsh
             ])
             ++ (with inputs; [
-              arcan.nixosModules.config.default
-              arcan.nixosModules.options.default
-              homeManager.nixosModules.home-manager
               musnix.nixosModules.musnix
-              nixpkgs.nixosModules.notDetected
-              nixvim.nixosModules.nixvim
-              sops.nixosModules.sops
             ]);
-          specialArgs = inputs;
-          system = "x86_64-linux";
         };
-        epc = nixpkgs.lib.nixosSystem {
+        epc = default.extendModules {
           modules =
             (with nixosModules; [
+              config.grub
+              config.iwd
+              config.privoxy
+              config.ungoogled-chromium
+
+              options.ungoogled-chromium
+
               systems.epc
-              users.nixos
-              users.root
-            ])
-            ++ (with nixosModules.config; [
-              arcan
-              builder
-              grub
-              home-manager
-              iwd
-              networking
-              nitrokey
-              nix
-              nixvim
-              openssh
-              pipewire
-              privoxy
-              sops
-              sudo
-              tor
-              ungoogled-chromium
-              zsh
-            ])
-            ++ (with nixosModules.options; [
-              nix
-              sops
-              ungoogled-chromium
-              zsh
-            ])
-            ++ (with inputs; [
-              arcan.nixosModules.config.default
-              arcan.nixosModules.options.default
-              nixpkgs.nixosModules.notDetected
-              sops.nixosModules.sops
-              homeManager.nixosModules.home-manager
-              nixvim.nixosModules.nixvim
             ]);
-          specialArgs = inputs;
-          system = "x86_64-linux";
         };
-        donet = nixpkgs.lib.nixosSystem {
+        donet = default.extendModules {
           modules =
             (with nixosModules; [
+              config.qemuGuest
+              config.systemd-boot
+              options.conduit
               systems.donet
-              users.nixos
-              users.root
-            ])
-            ++ (with nixosModules.config; [
-              home-manager
-              networking
-              nix
-              nixvim
-              openssh
-              qemuGuest
-              sops
-              sudo
-              systemd-boot
-              zsh
-            ])
-            ++ (with nixosModules.options; [
-              conduit
-              nix
-              sops
-              zsh
             ])
             ++ (with inputs; [
-              homeManager.nixosModules.home-manager
-              nixvim.nixosModules.nixvim
               simple-nixos-mailserver.nixosModules.mailserver
-              sops.nixosModules.sops
             ]);
-          specialArgs = inputs;
-          system = "x86_64-linux";
         };
         live = nixpkgs.lib.nixosSystem {
           modules =
@@ -229,8 +150,10 @@
               config.openssh
               config.sops
               config.users
+
               options.nix
               options.sops
+
               systems.live
             ])
             ++ (with inputs; [
@@ -249,15 +172,12 @@
       };
       nixosModules = {
         config = {
-          alacritty = import nixosModules/config/alacritty;
           arcan = import nixosModules/config/arcan;
           builder = import nixosModules/config/builder;
           cloneConfig = import nixosModules/config/cloneConfig;
-          glirc = import nixosModules/config/glirc;
           grub = import nixosModules/config/grub;
           harmonia = import nixosModules/config/harmonia;
           home-manager = import nixosModules/config/home-manager;
-          iamb = import nixosModules/config/iamb;
           iwd = import nixosModules/config/iwd;
           musnix = import nixosModules/config/musnix;
           networking = import nixosModules/config/networking;
@@ -277,16 +197,12 @@
           ssh = import nixosModules/config/ssh;
           sudo = import nixosModules/config/sudo;
           systemd-boot = import nixosModules/config/systemd-boot;
-          tor = import nixosModules/config/tor;
           ungoogled-chromium = import nixosModules/config/ungoogled-chromium;
           users = import nixosModules/config/users;
           zsh = import nixosModules/config/zsh;
         };
         options = {
-          alacritty = import nixosModules/options/alacritty;
           conduit = import nixosModules/options/conduit;
-          glirc = import nixosModules/options/glirc;
-          iamb = import nixosModules/options/iamb;
           nix = import nixosModules/options/nix;
           pianoteq = import nixosModules/options/pianoteq;
           pipewire = import nixosModules/options/pipewire;
@@ -335,7 +251,6 @@
         in
         rec {
           inherit (pkgs) ungoogled-chromium;
-          iamb = callPackage pkgs/iamb { };
           texlive = callPackage pkgs/texlive { };
           ploopy-udev = callPackage pkgs/ploopy-udev { };
           sclang-with-superdirt = supercollider.packages.${system}.sclang-with-superdirt.override {
@@ -367,8 +282,6 @@
           pkgs = import nixpkgs { inherit system; };
         in
         rec {
-          glirc = haskellPackages-glirc.glirc;
-          haskellPackages-glirc = callPackage legacyPackages/haskellPackages/glirc { };
           pianoteq = src: callPackage legacyPackages/pianoteq { inherit src; };
         };
     });

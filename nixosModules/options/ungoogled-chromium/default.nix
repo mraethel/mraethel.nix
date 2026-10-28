@@ -7,7 +7,7 @@
 let
   cfg = config.programs.chromium;
   mbType = with lib.types; listOf (attrsOf (either str mbType));
-  # Maybe one day this will work (https://github.com/NixOS/nixpkgs/pull/284551)
+  # Maybe one day this will work (https://discourse.nixos.org/t/problems-with-types-oneof-and-submodules/15197/5) (https://github.com/NixOS/nixpkgs/pull/254790)
   # mbType = with lib.types;
   #   listOf
   #     (oneOf [
