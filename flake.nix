@@ -77,7 +77,6 @@
               pianoteq
               ploopy
               sops
-              ssh
               ungoogled-chromium
               zsh
             ])
@@ -293,7 +292,6 @@
           pipewire = import nixosModules/options/pipewire;
           ploopy = import nixosModules/options/ploopy;
           sops = import nixosModules/options/sops;
-          ssh = import nixosModules/options/ssh;
           ungoogled-chromium = import nixosModules/options/ungoogled-chromium;
           zsh = import nixosModules/options/zsh;
         };
