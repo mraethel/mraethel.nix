@@ -131,9 +131,12 @@
         donet = default.extendModules {
           modules =
             (with nixosModules; [
+              config.nginx
               config.qemuGuest
               config.systemd-boot
+
               options.conduit
+
               systems.donet
             ])
             ++ (with inputs; [

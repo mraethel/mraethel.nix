@@ -1,13 +1,24 @@
 {
-  imports = [ ./mailserver ];
+  config,
+  lib,
+  ...
+}: {
+  imports = [
+    ./harmonia
+    ./mailserver
+    ./nginx
+    ./vaultwarden
+  ];
   networking = {
     domain = "mraethel.de";
+    firewall.allowedTCPPorts = [ 22 80 443 ];
     hostName = "donet";
   };
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/74104af6-e987-4e20-8d43-37cfcd7d2325";
+      device = "/dev/mapper/crypt-root";
       fsType = "ext4";
+      options = [ "x-systemd.device-timeout=infinity" ];
     };
     "/boot" = {
       device = "/dev/disk/by-uuid/A4E4-40F1";
@@ -18,29 +29,35 @@
       ];
     };
   };
-  boot.initrd = {
-    availableKernelModules = [
-      "ata_piix"
-      "uhci_hcd"
-      "virtio_pci"
-      "virtio_net"
-      "sr_mod"
-      "virtio_blk"
-    ];
-    kernelModules = [ "dm-snapshot" ];
-    luks.devices.cryptroot = {
-      device = "/dev/disk/by-uuid/18977a69-faef-40c5-b7d2-1ee9e8f02777";
-      preLVM = true;
-    };
-    network = {
-      enable = true;
-      ssh = {
-        enable = true;
-        shell = "/bin/cryptsetup-askpass";
-        authorizedKeyFiles = [ ./ssh_initrd_ed25519_key.pub ];
-        hostKeys = [ "/etc/ssh/ssh_initrd_ed25519_key" ];
+  boot = {
+    initrd = {
+      availableKernelModules = [
+        "ata_piix"
+        "uhci_hcd"
+        "virtio_pci"
+        "virtio_net"
+        "sr_mod"
+        "virtio_blk"
+      ];
+      kernelModules = [ "dm-snapshot" ];
+      luks.devices.cryptroot.device = "/dev/disk/by-uuid/18977a69-faef-40c5-b7d2-1ee9e8f02777";
+      network = {
+        ssh = {
+          enable = true;
+          authorizedKeys = [ ''command="systemctl default" ${lib.fileContents ./ssh_initrd_ed25519_key.pub}'' ];
+          hostKeys = [ "/etc/ssh/ssh_initrd_ed25519_key" ];
+        };
       };
+      systemd.network.enable = true;
     };
+    kernelParams = let
+      net = config.systemd.network.networks;
+      iface = net.ens3;
+      cidr = builtins.head iface.address;
+      addr = builtins.head (lib.strings.splitString "/" cidr);
+      gw = builtins.head iface.gateway;
+      hostName = config.networking.hostName;
+    in [ "ip=${ addr }::${ gw }:255.255.252.0:${ hostName }:${ iface.name }:off" ];
   };
   systemd.network.networks.ens3 = {
     address = [
@@ -51,8 +68,12 @@
       "193.26.156.1"
       "fe80::1"
     ];
+    name = "ens3";
   };
   system.stateVersion = "24.05";
-  swapDevices = [ { device = "/dev/disk/by-uuid/3ba17294-d310-4818-8f6e-ed1a58a083ae"; } ];
+  swapDevices = [{
+    device = "/dev/mapper/crypt-swap";
+    options = [ "x-systemd.device-timeout=infinity" ];
+  }];
   time.timeZone = "Europe/Berlin";
 }

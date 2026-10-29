@@ -7,7 +7,7 @@
     enable = true;
     fqdn = "mail.mraethel.de";
     domains = [ "mraethel.de" ];
-    loginAccounts = {
+    accounts = {
       "mail@mraethel.de" = {
         hashedPasswordFile = config.sops.secrets."mailserver/mail@mraethel.de".path;
         aliases = [
@@ -16,16 +16,21 @@
         ];
         quota = "2G";
       };
-      "vault@mraethel.de" = {
-        hashedPasswordFile = config.sops.secrets."mailserver/vault@mraethel.de".path;
+      "${config.services.vaultwarden.config.SMTP_FROM}" = {
+        hashedPasswordFile = config.sops.secrets."mailserver/${config.services.vaultwarden.config.SMTP_FROM}".path;
         sendOnly = true;
         quota = "100M";
       };
     };
-    certificateScheme = "acme-nginx";
+    x509.useACMEHost = config.mailserver.fqdn;
+    stateVersion = 5;
+  };
+  services.nginx.virtualHosts."${config.mailserver.fqdn}" = {
+    enableACME = true;
+    forceSSL = true;
   };
   sops.secrets = {
     "mailserver/mail@mraethel.de".sopsFile = ../secrets.yaml;
-    "mailserver/vault@mraethel.de".sopsFile = ../secrets.yaml;
+    "mailserver/${config.services.vaultwarden.config.SMTP_FROM}".sopsFile = ../secrets.yaml;
   };
 }
