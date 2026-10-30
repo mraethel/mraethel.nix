@@ -16,6 +16,7 @@ creation_rules:
     key_groups:
       - age:
         - *blackbox
+        - *donet
         - *epc
         - *tuxedo
   - path_regex: nixosModules/config/nix/secrets.yaml
