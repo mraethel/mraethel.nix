@@ -1,7 +1,8 @@
 {
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./harmonia
     ./mailserver
@@ -10,7 +11,11 @@
   ];
   networking = {
     domain = "mraethel.de";
-    firewall.allowedTCPPorts = [ 22 80 443 ];
+    firewall.allowedTCPPorts = [
+      22
+      80
+      443
+    ];
     hostName = "donet";
   };
   fileSystems."/boot" = {
@@ -23,7 +28,9 @@
   };
   boot.initrd = {
     luks.devices.cryptroot.device = "/dev/disk/by-uuid/18977a69-faef-40c5-b7d2-1ee9e8f02777";
-    network.ssh.authorizedKeys = [ ''command="systemctl default" ${lib.fileContents ./ssh_initrd_ed25519_key.pub}'' ];
+    network.ssh.authorizedKeys = [
+      ''command="systemctl default" ${lib.fileContents ./ssh_initrd_ed25519_key.pub}''
+    ];
   };
   systemd.network.networks.ens3 = {
     name = "ens3";

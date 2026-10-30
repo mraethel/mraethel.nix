@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   fileSystems."/" = {
     device = "/dev/mapper/crypt-root";
     fsType = "ext4";
@@ -25,18 +26,22 @@
       };
       systemd.network.enable = true;
     };
-    kernelParams = let
-      net = config.systemd.network.networks;
-      iface = net.ens3;
-      cidr = builtins.head iface.address;
-      addr = builtins.head (lib.strings.splitString "/" cidr);
-      gw = builtins.head iface.gateway;
-      hostName = config.networking.hostName;
-    in [ "ip=${ addr }::${ gw }:255.255.252.0:${ hostName }:${ iface.name }:off" ];
+    kernelParams =
+      let
+        net = config.systemd.network.networks;
+        iface = net.ens3;
+        cidr = builtins.head iface.address;
+        addr = builtins.head (lib.strings.splitString "/" cidr);
+        gw = builtins.head iface.gateway;
+        hostName = config.networking.hostName;
+      in
+      [ "ip=${addr}::${gw}:255.255.252.0:${hostName}:${iface.name}:off" ];
   };
-  swapDevices = [{
-    device = "/dev/mapper/crypt-swap";
-    options = [ "x-systemd.device-timeout=infinity" ];
-  }];
+  swapDevices = [
+    {
+      device = "/dev/mapper/crypt-swap";
+      options = [ "x-systemd.device-timeout=infinity" ];
+    }
+  ];
   time.timeZone = "Europe/Berlin";
 }

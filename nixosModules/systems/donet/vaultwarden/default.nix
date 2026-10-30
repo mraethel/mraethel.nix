@@ -1,14 +1,17 @@
 {
   config,
   ...
-}: let
+}:
+let
   cfg = config.services.vaultwarden;
-in {
+in
+{
   services = {
     nginx.virtualHosts."vault.mraethel.de" = {
       enableACME = true;
       forceSSL = true;
-      locations."/".proxyPass = "http://[${cfg.config.ROCKET_ADDRESS}]:${toString cfg.config.ROCKET_PORT}";
+      locations."/".proxyPass =
+        "http://[${cfg.config.ROCKET_ADDRESS}]:${toString cfg.config.ROCKET_PORT}";
     };
     vaultwarden = {
       enable = true;

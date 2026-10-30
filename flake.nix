@@ -114,8 +114,9 @@
             ]);
         };
         epc = default.extendModules {
-          modules =
-            (with nixosModules; [
+          modules = (
+            with nixosModules;
+            [
               config.grub
               config.iwd
               config.privoxy
@@ -124,15 +125,18 @@
               options.ungoogled-chromium
 
               systems.epc
-            ]);
+            ]
+          );
         };
         netcup = default.extendModules {
-          modules =
-            (with nixosModules; [
+          modules = (
+            with nixosModules;
+            [
               config.qemuGuest
               config.systemd-boot
               systems.netcup
-            ]);
+            ]
+          );
         };
         donet = netcup.extendModules {
           modules =

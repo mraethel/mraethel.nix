@@ -17,7 +17,8 @@
         quota = "2G";
       };
       "${config.services.vaultwarden.config.SMTP_FROM}" = {
-        hashedPasswordFile = config.sops.secrets."mailserver/${config.services.vaultwarden.config.SMTP_FROM}".path;
+        hashedPasswordFile =
+          config.sops.secrets."mailserver/${config.services.vaultwarden.config.SMTP_FROM}".path;
         sendOnly = true;
         quota = "100M";
       };
