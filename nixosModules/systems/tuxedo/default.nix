@@ -22,7 +22,7 @@
   };
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/37b5eb0a-aec1-4836-b3fd-0f27bdd010c8";
+      device = "/dev/mapper/cryptroot";
       fsType = "ext4";
     };
     "/boot" = {
