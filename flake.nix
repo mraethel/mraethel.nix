@@ -90,8 +90,6 @@
               systems.tuxedo
 
               users.builder
-              users.nixos
-              users.root
             ])
             ++ (with inputs; [
               musnix.nixosModules.musnix
@@ -128,15 +126,19 @@
               systems.epc
             ]);
         };
-        donet = default.extendModules {
+        netcup = default.extendModules {
+          modules =
+            (with nixosModules; [
+              config.qemuGuest
+              config.systemd-boot
+              systems.netcup
+            ]);
+        };
+        donet = netcup.extendModules {
           modules =
             (with nixosModules; [
               config.nginx
-              config.qemuGuest
-              config.systemd-boot
-
               options.conduit
-
               systems.donet
             ])
             ++ (with inputs; [
@@ -220,6 +222,7 @@
           donet = import nixosModules/systems/donet;
           epc = import nixosModules/systems/epc;
           live = import nixosModules/systems/live;
+          netcup = import nixosModules/systems/netcup;
           tuxedo = import nixosModules/systems/tuxedo;
         };
         users = {
