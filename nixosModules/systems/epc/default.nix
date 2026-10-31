@@ -1,19 +1,30 @@
 {
   boot = {
-    initrd.availableKernelModules = [
-      "ahci"
-      "ehci_pci"
-      "sd_mod"
-      "uhci_hcd"
-    ];
+    initrd = {
+      availableKernelModules = [
+        "ahci"
+        "ehci_pci"
+        "sd_mod"
+        "uhci_hcd"
+        "usb_storage"
+      ];
+      kernelModules = [ "dm-snapshot" ];
+    };
     loader.grub.device = "/dev/sda";
   };
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/743b9a53-9107-4fdb-85d8-55eac5cf7154";
-    fsType = "ext4";
+  fileSystems = {
+    "/" = {
+      device = "/dev/mapper/crypt-root";
+      fsType = "ext4";
+    };
+    "/boot" = {
+      device = "/dev/disk/by-uuid/2844-2BE6";
+      fsType = "vfat";
+      options = [ "fmask=0077" "dmask=0077" ];
+    };
   };
   networking.hostName = "epc";
-  swapDevices = [ { device = "/dev/disk/by-uuid/76801569-1172-415e-9733-09e62815073d"; } ];
-  system.stateVersion = "22.11";
+  swapDevices = [ { device = "/dev/mapper/crypt-swap"; } ];
+  system.stateVersion = "26.05";
   time.timeZone = "Europe/Berlin";
 }
