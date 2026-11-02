@@ -9,6 +9,10 @@
         "usb_storage"
       ];
       kernelModules = [ "dm-snapshot" ];
+      luks.devices.cryptroot = {
+        crypttabExtraOpts = [ "fido2_devices=auto" ];
+        device = "/dev/disk/by-uuid/b18b9ba1-a643-4e86-80a8-6b8c7cf7596b";
+      };
     };
     loader.grub.device = "/dev/sda";
   };
