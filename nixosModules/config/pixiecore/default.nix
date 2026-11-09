@@ -5,8 +5,6 @@
 let
   builderConfig =
     mraethel.nixosConfigurations.builder.config.system.build.images.netboot.passthru.config.system.build;
-  builderTarget =
-    mraethel.nixosConfigurations.builder.config.system.build.images.netboot.stdenv.hostPlatform.linux-kernel.target;
 in
 {
   services.pixiecore = {
@@ -14,7 +12,7 @@ in
     dhcpNoBind = true;
     enable = true;
     initrd = "${builderConfig.netbootRamdisk}/initrd";
-    kernel = "${builderConfig.kernel}/${builderTarget}";
+    kernel = "${builderConfig.kernel}/${builderConfig.kernel.target}";
     openFirewall = true;
   };
 }
